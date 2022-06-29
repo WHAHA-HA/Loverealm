@@ -1,0 +1,32 @@
+.global-stats
+  .stat-counters
+    - @stats.each do |key, value|
+      .stat-counter-item
+        .stat-counter-key
+          = key.to_s.humanize
+        .stat-counter-value
+          - if value.kind_of?(Hash)
+            = value[:total_count]
+            - value.except(:total_count).each do |k, v|
+              .stat-count-subvalue
+                = k.to_s.humanize
+                = v
+
+          - else
+            = value
+
+.row
+  - @top_contents.each do |key, value|
+    .col-md-4
+      .group-title
+        = key.to_s.humanize
+
+      %table.table-w100
+        %thead
+          %tr
+            %th Title
+        %tbody
+          - value.each do |content|
+            %tr
+              %td
+                = link_to content.title || content.content_type, dashboard_content_path(content)

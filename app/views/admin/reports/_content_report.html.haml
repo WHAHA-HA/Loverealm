@@ -1,0 +1,6 @@
+%h2 Reports for #{link_to @report.target_type, [:dashboard, @report.target]}
+.text-holder
+  %i Description
+  %p #{@report.description}
+
+= link_to 'Delete content', process_report_admin_report_path(@report), method: :post, class: 'btn btn-default'

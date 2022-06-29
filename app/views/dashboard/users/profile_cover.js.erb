@@ -1,0 +1,5 @@
+<% if @updated %>
+  $('.profile-cover').attr('src', '<%= current_user.cover.url(:medium) %>');
+<% else %>
+  showAlert('error', 'Cover has failed to upload due to an error.');
+<% end %>

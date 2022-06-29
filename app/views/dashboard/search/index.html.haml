@@ -1,0 +1,27 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Home', dashboard_user_path(current_user)
+  %li Search
+
+.search-header
+  %h1
+    Search results
+  .buttons
+    = link_to "People", dashboard_search_path(filter: params[:filter], type: :people), class: ['button', 'button-lg', params[:type] == 'people' ? 'active' : '']
+    = link_to "Stories", dashboard_search_path(filter: params[:filter], type: :stories), class: ['button', 'button-lg', params[:type] == 'stories' ? 'active' : '']
+
+- if show_users?
+  .users
+    = render partial: 'dashboard/users/card', collection: @users, as: :user
+
+- if show_stories?
+  .stories
+    = render partial: 'dashboard/contents/story/card', collection: @content, as: :story
+
+- unless (show_stories? && @content.present?) || (show_users? && @users.present?)
+  .empty-search-result
+    %p Sorry, We could not find what you were looking for. Keep searching.
+
+    %blockquote
+      %p "But if from thence thou shalt seek the LORD thy God, thou shalt find [him], if thou seek him with all thy heart and with all thy soul."
+      %footer Deuteronomy 4:29

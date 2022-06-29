@@ -1,0 +1,6 @@
+.content-comments
+  - comments = content.comments.includes(:user).page().per(5)
+  - if comments.next_page
+    = link_to 'Previous comments', comments_dashboard_content_path(content, page: comments.next_page), remote: true, class: 'load-more-comments'
+  = render partial: 'dashboard/comments/list', locals: { comments: comments.reverse }
+  = render partial: 'dashboard/comments/form', locals: { comment: Comment.new(content: content) }

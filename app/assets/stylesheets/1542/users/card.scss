@@ -1,0 +1,32 @@
+.user-card {
+  margin: 10px 0;
+
+  .user-card-content {
+    background-color: #fff;
+    padding: 10px;
+
+    .user-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      padding: 3px;
+      background-color: #fff;
+      border: 1px solid #eaeaea;
+    }
+
+    .media-heading {
+      margin-bottom: 0;
+
+      .user-name {
+        font-size: 20px;
+        float: left;
+        line-height: 46px;
+      }
+
+      .relationship-button {
+        float: right;
+        margin: 7px 0;
+      }
+    }
+  }
+}

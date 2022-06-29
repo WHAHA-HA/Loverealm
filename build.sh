@@ -1,0 +1,2 @@
+rubocop
+rspec spec

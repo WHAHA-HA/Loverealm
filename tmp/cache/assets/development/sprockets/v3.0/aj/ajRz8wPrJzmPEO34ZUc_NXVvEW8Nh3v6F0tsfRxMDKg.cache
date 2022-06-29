@@ -1,0 +1,13 @@
+I"¢(function() {
+  $(function() {
+    $(document).on('click', '.share-button-container .external-sharing', function(e) {
+      e.preventDefault();
+      return $(this).parents('.share-button-container').siblings('.share-buttons').toggleClass('hidden');
+    });
+    return $(document).on('mouseleave', '.content', function(e) {
+      return $(this).find('.share-buttons').addClass('hidden');
+    });
+  });
+
+}).call(this);
+:ET

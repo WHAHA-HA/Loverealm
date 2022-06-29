@@ -1,0 +1,19 @@
+.message{class: "clearfix #{message.sender == current_user ? 'sent-message' : 'received-message'}"}
+  = link_to dashboard_profile_path(message.sender) do
+    = show_avatar message.sender, 'thumb', class: 'user-avatar'
+
+  .message-content
+    .message-header
+      %span.date #{message.created_at.strftime '%d/%m/%Y'}
+
+    .message-text
+      - if local_assigns.fetch(:show_removed, false) || !(message.removed && message.sender == current_user)
+        = sanitized_preview(message.body + "#{message.daily_message? ? " <a href='/dashboard/contents/#{message.story_id}'>here</a>" : "" }")
+        .text-right
+          - if local_assigns.fetch :delete_option, false
+            = link_to "Delete", dashboard_message_path(message), method: :delete, data: { confirm: "Are you sure ?" }
+
+          - if local_assigns.fetch :retrieve_option, false
+            = link_to "Retrieve", retrieve_message_dashboard_message_path(message), method: :post
+      - else
+        .removed-message Message has been removed at #{pretty_time message.removed_at}

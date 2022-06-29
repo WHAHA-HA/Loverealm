@@ -1,0 +1,4 @@
+.content-tags
+  - content.hash_tags.each do |tag|
+    %span.tag
+      = link_to tag.name, dashboard_contents_path(tag_id: tag.id)

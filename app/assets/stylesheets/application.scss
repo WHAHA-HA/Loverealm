@@ -1,0 +1,133 @@
+/**
+ * LoveRealm Website cutouts
+ *
+ *
+ * CONTENTS
+ *
+ * SETTINGS
+ * Global...............Globally-available variables and config.
+ *
+ * TOOLS
+ * Mixins...............Useful mixins.
+ *
+ * GENERIC
+ * Normalize.css........A level playing field.
+ * Box-sizing...........Better default `box-sizing`.
+ *
+ * BASE
+ * Headings.............H1–H6 styles.
+ *
+ * OBJECTS
+ * Wrappers.............Wrapping and constraining elements.
+ *
+ * COMPONENTS
+ * Page-head............The main page header.
+ * Page-foot............The main page footer.
+ * Buttons..............Button elements.
+ *
+ * TRUMPS
+ * Text.................Text helpers.
+ */
+/*---------------------------------*\
+             #SETTINGS
+\*---------------------------------*/
+
+// 1542
+@import "1542/variables";
+@import "chosen";
+@import "jqueryui";
+@import "1542/vendor/chosen.override";
+@import "1542/vendor/jqueryui.override";
+// END 1542
+
+
+@import "fonts";
+@import "colors";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-overrides";
+@import "components";
+@import "login-screen";
+@import "my-content";
+@import "publish-hashtag";
+@import "report-user";
+@import "layout";
+@import "registration";
+@import "story-style";
+@import "recommend-story-component";
+@import "feedback";
+@import "preferences";
+@import "home-page-mobile";
+@import "messages-mobile";
+@import "preferences-mobile";
+@import "inbox-mobile";
+@import "conversations-mobile";
+@import "feedback-mobile";
+@import "follow-mobile";
+@import "mobile";
+@import "custom";
+@import 'jquery.tagsinput';
+@import 'bootsy';
+@import 'form';
+@import 'admin/style';
+@import 'toastr';
+
+// 1542
+@import "1542/variables";
+@import "1542/style";
+@import "1542/components/header";
+@import "1542/components/search_form";
+@import "1542/components/aside_items.scss";
+@import "1542/components/footer";
+@import "1542/components/trending_tags.scss";
+
+@import "1542/application/dashboard_header.scss";
+@import "1542/application/follow_content.scss";
+@import "1542/application/splash_screen.scss";
+
+@import "1542/contents/content.scss";
+@import "1542/contents/actions.scss";
+@import "1542/contents/show.scss";
+@import "1542/contents/new.scss";
+@import "1542/contents/tags.scss";
+@import "1542/contents/story/card.scss";
+
+@import "1542/conversations/trash.scss";
+@import "1542/appointments/chat.scss";
+
+@import "1542/comments/comment.scss";
+
+@import "1542/notifications/index.scss";
+
+@import "1542/users/style.scss";
+@import "1542/users/profile_options.scss";
+@import "1542/users/edit.scss";
+@import "1542/users/card.scss";
+@import "1542/users/suggested_user.scss";
+@import "1542/users/profile.scss";
+
+@import "1542/search/index.scss";
+
+@import "1542/messages/index.scss";
+@import "1542/messages/conversation.scss";
+@import "1542/messages/form.scss";
+@import "1542/messages/style.scss";
+
+@import "1542/invites/index.scss";
+
+@import "1542/relationships/index.scss";
+
+@import "1542/welcome/style.scss";
+@import "1542/welcome/hash_tags.scss";
+@import "1542/welcome/user_info.scss";
+@import "1542/welcome/invite_people.scss";
+
+@import "1542/home/index.scss";
+@import "1542/home/about-us";
+@import "1542/home/about-jesus";
+@import "1542/home/press";
+@import "1542/home/privacy-policy";
+@import "1542/home/terms";
+@import "1542/home/help";
+@import "1542/home/careers";
+@import "1542/home/mobile-app";

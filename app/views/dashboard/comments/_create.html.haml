@@ -1,0 +1,10 @@
+- content = local[:content]
+- if can? :comment, content.user
+  %div.new-comment.validating-form
+    = simple_form_for Comment.new, url: dashboard_comments_path(content), method: :post, remote: :true do |f|
+      = f.input :body, as: :text, label: false, required: true
+      .error-message
+        Can't be blank
+      = f.input :content_id, as: :hidden, required: true, input_html: { value: content.id }
+      = f.submit "Comment"
+  %hr

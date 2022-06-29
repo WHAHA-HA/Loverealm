@@ -1,0 +1,18 @@
+form.new_message {
+  .tt-menu {
+    color: #333;
+
+    .tt-suggestion {
+      display: block;
+      font-size: 14px;
+      background-color: #fff;
+      padding: 4px 10px;
+      line-height: 22px;
+      cursor: pointer;
+
+      &:hover, &.tt-cursor {
+        background-color: #efefef;
+      }
+    }
+  }
+}

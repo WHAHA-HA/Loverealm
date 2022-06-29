@@ -1,0 +1,43 @@
+.content.story{'data-content-id' => content.id}
+  = render partial: 'dashboard/contents/shared_by', locals: { content: content }
+
+  .content-header
+    .media
+      = link_to dashboard_profile_path(content.user), class: 'media-left' do
+        = show_avatar(content.user, "thumb")
+
+      .media-body
+        .media-heading
+          = link_to content.user.full_name, dashboard_profile_path(content.user), class: 'content-author'
+
+          %time
+            = posted_time content
+
+          - if can?(:edit, content)
+            .controls
+              = link_to edit_dashboard_content_path(content), class: "content-control-item edit-#{content.id}" do
+                %span.glyphicon.glyphicon-pencil
+                Edit
+              = link_to dashboard_content_path(content), method: :delete, remote: true,  class: 'content-control-item', data: { confirm: 'Are you sure?' } do
+                %span.glyphicon.glyphicon-trash
+                Delete
+
+  .content-body
+    = link_to dashboard_content_path(content), class: 'content-image' do
+      = image_tag(content.image)
+
+    .story-text-wrapper
+      %h2
+        = link_to sanitized_preview(content.title), dashboard_content_path(content)
+
+      .excert
+        = sanitized_preview(shortik(content.description, 100))
+
+      .read-more
+        = link_to "Read more", dashboard_content_path(content)
+
+  .content-footer.clearfix
+    = render partial: 'dashboard/contents/actions', locals: { content: content }
+    = render partial: 'dashboard/contents/tags', locals: { content: content }
+
+  = render partial: 'dashboard/contents/card_comments', locals: { content: content }

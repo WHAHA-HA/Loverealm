@@ -1,0 +1,12 @@
+.suggested-hash-tags {
+
+  .hash-tag-checkbox {
+    width: 100px;
+    margin: 5px;
+    text-align: left;
+  }
+
+  .hash-tag-checkbox + .hash-tag-checkbox {
+    margin-left: 5px;
+  }
+}

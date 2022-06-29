@@ -1,0 +1,16 @@
+.comment.clearfix{'data-comment-id': comment.id}
+  = link_to dashboard_profile_path(comment.user), class: 'comment-author-image' do
+    = show_avatar(comment.user, "thumb")
+
+  .comment-content
+    .comment-header
+      = link_to comment.user.full_name, dashboard_profile_path(comment.user), class: 'comment-author-name'
+      %span.time
+        = "#{time_ago_in_words(comment.created_at)} ago"
+
+      = link_to new_report_path(target_type: :comment, target_id: comment.id), remote: true, class: 'report pull-right' do
+        %span.icon.glyphicon.glyphicon-flag{"aria-hidden" => "true"}
+        Report
+
+    .comment-body
+      = best_in_place_if comment.user_id == current_user.try(:id), [:dashboard, comment], :body, as: :textarea

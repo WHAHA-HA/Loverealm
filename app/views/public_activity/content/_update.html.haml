@@ -1,0 +1,8 @@
+%span.glyphicon.glyphicon-edit
+%small.text-muted= a.created_at.strftime('%H:%M:%S %-d %B %Y')
+%br/
+%strong= activity.owner ? activity.owner.full_name : 'Guest'
+- if a.trackable
+  edited the story #{link_to a.trackable.title, dashboard_content_path(a.trackable)}.
+- else
+  edited the story that is currently deleted.

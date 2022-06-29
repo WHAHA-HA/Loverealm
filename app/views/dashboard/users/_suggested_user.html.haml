@@ -1,0 +1,10 @@
+.suggested-user
+  .media
+    = link_to dashboard_profile_path(user), class: 'media-left' do
+      = image_tag user.avatar.url(:square), class: 'media-object user-avatar'
+
+    .media-body
+      .media-heading
+        = link_to user.full_name, dashboard_profile_path(user), class: 'user-name'
+
+      = render 'follow_button', other_user: user

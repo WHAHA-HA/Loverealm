@@ -1,0 +1,60 @@
+I"×(function() {
+  $(function() {
+    var footer_content;
+    footer_content = function(data) {
+      return '<div class="tt-dataset-footer">' + 'See all: ' + ("<a href=\"/dashboard/search?filter=" + data.query + "&type=people\">People</a>") + ("<a href=\"/dashboard/search?filter=" + data.query + "&type=stories\">Stories</a>") + '</div>';
+    };
+    $('.search-text').typeahead(null, {
+      name: 'user-suggestions',
+      display: function(user) {
+        return user.first_name + " " + user.last_name;
+      },
+      templates: {
+        header: '<h4>Users</h4>',
+        footer: footer_content
+      },
+      source: new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+          url: '/dashboard/search/get_autocomplete_data?search=%QUERY',
+          wildcard: '%QUERY',
+          filter: function(response) {
+            return response.users;
+          }
+        }
+      })
+    }, {
+      name: 'content-suggestions',
+      display: 'title',
+      templates: {
+        header: '<h4>Stories</h4>',
+        footer: footer_content
+      },
+      source: new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+          url: '/dashboard/search/get_autocomplete_data?search=%QUERY',
+          wildcard: '%QUERY',
+          filter: function(response) {
+            return response.contents;
+          }
+        }
+      })
+    }).on('typeahead:selected', function(e, selection) {
+      if (selection.title != null) {
+        return window.location.href = "/dashboard/contents/" + selection.id;
+      } else if (selection.first_name != null) {
+        return window.location.href = "/dashboard/users/" + selection.id + "/profile";
+      }
+    });
+    return $('#search').on('submit', function(e) {
+      if ($(this).find('input.tt-input').val() === '') {
+        return false;
+      }
+    });
+  });
+
+}).call(this);
+:ET

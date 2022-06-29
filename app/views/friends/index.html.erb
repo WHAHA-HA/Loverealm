@@ -1,0 +1,57 @@
+<script src="https://apis.google.com/js/client.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript">
+function auth() {
+  var config = {
+    'client_id': '711152138641-phhs3o142jfdcfu2gbopo6uh7j9grlqh.apps.googleusercontent.com',
+    'scope': ['https://www.google.com/m8/feeds', 'https://www.googleapis.com/auth/gmail.send', 'https://www.googleapis.com/auth/gmail.compose']
+  };
+  gapi.auth.authorize(config, function() {
+    fetch(gapi.auth.getToken());
+    loadGmailApi()
+    sendMessage()
+  });
+}
+
+  function fetch(token) {
+    $.ajax({
+      url: "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + token.access_token + "&alt=json&max-results=10000",
+      dataType: "jsonp",
+      success:function(data) {
+        for (i = 0; i < data.feed.entry.length; i++) {
+          if (typeof data.feed.entry[i].gd$email != 'undefined') {
+            // console.log(data.feed.entry[i].gd$email[0].address)
+          };
+        }
+      }
+    });
+  }
+
+ function sendMessage(userId, email, callback) {
+  var base64EncodedEmail = btoa('email');
+  console.log(base64EncodedEmail)
+  var request = gapi.client.gmail.users.messages.send({
+    'userId': 'jordanovskibojan+test@gmail.com',
+    'message': {
+      'raw': base64EncodedEmail
+    }
+  });
+  request.execute(callback);
+}
+  function loadGmailApi() {
+    gapi.client.load('gmail', 'v1', listLabels);
+  }
+  // function g_plus_fetch(token) {
+  //   $.ajax({
+  //     url: "https://www.googleapis.com/plus/v1/people/me",
+  //     dataType: "jsonp",
+  //     success:function(res) {
+  //       console.log("Get contacts:", res);
+  //     }
+  //   });
+  // }
+</script>
+
+<button id="bojan" onclick="auth();">GET GMAIL CONTACTS FEED</button>
+
+<!-- <button id="bojan" onclick="auth();">GET G+ Contacts FEED</button> -->

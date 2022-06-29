@@ -1,0 +1,10 @@
+%h2 Reports for #{@report.target_type}
+.text-holder
+  %i Comment
+  %p #{@report.target.body}
+
+
+  %i Description
+  %p #{@report.description}
+
+= link_to 'Delete comment', process_report_admin_report_path(@report), method: :post, class: 'btn btn-default'

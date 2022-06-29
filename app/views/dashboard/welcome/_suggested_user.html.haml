@@ -1,0 +1,6 @@
+.follow-box.pull-left
+  .holder
+    .overlay-follow
+    = image_tag user.avatar.url, {class: "logo-simple"}
+    %span #{user.full_name}
+  = render 'follow_button', other_user: user

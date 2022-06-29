@@ -1,0 +1,5 @@
+$content = $('.content[data-content-id="<%= @comment.content_id %>"')
+$comment = $('<%= j render partial: @comment, as: :comment %>')
+$content.find('.comments').append($comment)
+$content.find('.content-action.comment-action .count').text(function(index, value){ return ++value });
+$content.find('textarea[name="comment[body]"]').val('');

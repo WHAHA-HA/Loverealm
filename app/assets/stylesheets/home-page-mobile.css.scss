@@ -1,0 +1,95 @@
+@media only screen and (max-width: 768px)  {
+	.home {
+		.home-navbar,
+		.home-navbar-background {
+			position: absolute;
+		}
+
+		.navbar-header {
+			display: none;
+		}
+
+		.nav {
+			float: right !important;
+    	margin: 0 -15px 0 0;
+		}
+
+		.form.signup__heading {
+			font-size: 38px;
+		}
+
+		.form-signup__intro {
+			font-size: 12px;
+		}
+
+		.form-signup .btn-facebook {
+			border: none;
+			width: 50px;
+			height: 50px;
+			overflow: hidden;
+			float: left;
+			background-repeat: no-repeat;
+  		background-position: center;
+  		background-color: rgba(0, 0, 0, 0.2);
+  		padding: 0;
+  		left: 50%;
+  		position: relative;
+  		margin-left: -55px;
+  		margin-right: 70px;
+
+  		&:hover {
+  			background-color: rgba(0, 0, 0, 0.2) !important;
+  		}
+
+			.fa-facebook, .google-icon {
+				height: 50px;
+				width: 50px;
+				left: 0;
+	  			top: 0;
+	  			background-position: center;
+	  			background-repeat: no-repeat;
+			}
+
+			.fa-facebook {
+				-webkit-background-size: 30%;
+				     -o-background-size: 30%;
+				        background-size: 30%;
+			}
+
+			.google-icon {
+				-webkit-background-size: 60%;
+				     -o-background-size: 60%;
+				        background-size: 60%;
+			}
+		}
+	}
+
+	.login-screen {
+		.form-signup {
+		  left: 0;
+		  display: none;
+
+		  &.home-current-form {
+		    display: block;
+		  }
+		}
+
+		.form-login.sidebar-login {
+		  right: 0;
+	    margin: 0 auto;
+	    position: relative;
+	    width: 100%;
+	    top: 0;
+	    display: none;
+	    min-height: 580px;
+
+		  &.home-current-form {
+		    display: block;
+		  }
+		}
+	}
+
+	.feedback-section {
+		display: none;
+	}
+}

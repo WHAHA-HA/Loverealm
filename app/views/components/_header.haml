@@ -1,0 +1,59 @@
+%header
+  %nav.navbar.navbar-custom.navbar-fixed-top
+    .container
+      .navbar-header
+        %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+
+        = link_to home_path, class: 'navbar-brand' do
+          = image_tag "brand-1542.png"
+
+      .collapse.navbar-collapse
+        - if current_user
+          %ul.nav.navbar-nav
+            %li
+              = link_to dashboard_user_path(current_user) do
+                %i.header-icon.home
+                = tv '.home'
+            %li
+              = link_to dashboard_user_notifications_path(current_user) do
+                %i.header-icon.bell
+                  - if current_user.unread_notification_count > 0
+                    %span.counter
+                      = current_user.unread_notification_count
+                = tv '.notifications'
+            %li
+              = link_to dashboard_user_conversations_path(current_user) do
+                %i.header-icon.messages
+                  - if current_user.unread_messages_count > 0
+                    %span.counter
+                      = current_user.unread_messages_count
+                = tv '.messages'
+            %li
+              = link_to dashboard_invites_path do
+                %i.header-icon.people
+                = tv '.invite'
+
+          %ul.nav.navbar-nav.navbar-right
+            %li.dropdown
+              %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                %i.header-icon.profile
+                = tv '.profile'
+                %span.caret
+
+              %ul.dropdown-menu
+                - if current_user.admin?
+                  %li
+                    = link_to tv('.admin_panel'), admin_home_index_path
+                %li
+                  = link_to tv('.profile'), dashboard_profile_path(current_user)
+                %li
+                  = link_to tv('.settings'), dashboard_preferences_path(current_user)
+                %li
+                  = link_to tv('.logout'), destroy_user_session_path
+
+          = render 'components/search_form'
+  .feed-updates

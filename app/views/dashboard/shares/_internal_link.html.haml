@@ -1,0 +1,4 @@
+- if content.is_shared_by? current_user
+  = link_to tv('.stop_sharing'), remove_dashboard_shares_path(content_id: content.id), remote: true, method: :delete
+- else
+  = link_to tv('.on_loverealm'), dashboard_shares_path(content_id: content.id), remote: true, method: :post

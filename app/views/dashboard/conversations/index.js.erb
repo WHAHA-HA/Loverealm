@@ -1,0 +1,7 @@
+$('.message-list').append("<%= j render partial: 'message_list', locals: { conversations: @conversations } %>");
+
+<% if @conversations.next_page %>
+  $('.load-more').attr('href', '<%= url_for(page: @conversations.next_page) %>');
+<% else %>
+  $('.load-more').remove();
+<% end %>

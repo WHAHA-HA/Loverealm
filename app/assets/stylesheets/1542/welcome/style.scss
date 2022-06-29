@@ -1,0 +1,86 @@
+.dashboard.welcome {
+  background-image: image-url("bg3.png");
+  background-size: cover;
+}
+
+.step-heading {
+  margin-bottom: 20px;
+  text-align: center;
+
+  .heading {
+    font-size: 2em;
+    line-height: 1em;
+    font-family: "Libre Baskerville",Times,serif;
+  }
+
+  .subheading {
+    margin-top: 10px;
+    font-size: 1.5em;
+    font-family: "Libre Baskerville",Times,serif;
+  }
+}
+
+.welcome-step-wrapper {
+  background-color: #fff;
+  max-width: 520px;
+  padding: 20px 70px;
+  margin: 25px auto;
+
+  .phrase {
+    span {
+      color: #c6181b;
+    }
+  }
+
+  blockquote.verse {
+    text-align: center;
+    font-size: 22px;
+    padding: 5px 20px;
+    font-family: "Libre Baskerville",Times,serif;
+    border-left: 3px solid #c6181b;
+    line-height: 1.4;
+    font-style: italic;
+    color: #000;
+    margin: 30px auto;
+
+    footer {
+      color: #c6181b;
+      font-size: 100%;
+      margin-top: 20px;
+      text-align: left;
+    }
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 100;
+    margin-bottom: 40px;
+  }
+
+  .welcome-btn {
+    border: 2px solid $primary-color;
+    padding: 5px 10px;
+    background-color: transparent;
+
+    &:hover {
+      background-color: $primary-color;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  .file-upload-value {
+    max-width: 100px;
+  }
+
+  input.datepicker {
+    float: right;
+    height: 36px;
+  }
+}

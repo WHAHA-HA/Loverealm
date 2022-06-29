@@ -1,0 +1,42 @@
+.row
+  .col-md-3
+    = form_tag inactive_admin_users_path, method: 'GET' do
+      .input-group
+        %input{type:'text', class:'datepicker form-control', placeholder:'From date', id: 'datepicker', name: 'from_date', value: params[:from_date]}
+
+        %span.input-group-btn
+          = button_tag 'Filter', class: 'btn btn-default'
+
+  .col-xs-3
+    = link_to 'Save as XLS', url_for(format: :xls, from_date: params[:from_date]), class: 'btn btn-default'
+
+%table.table-w100
+  %thead
+    %tr
+      %th #
+      %th User name
+      %th Newbie
+      %th Registered at
+      %th Current sign in at
+      %th Sign in count
+  %tbody
+    - @inactive_users.each do |user|
+      %tr
+        %td
+          = user.id
+        %td
+          - if user.full_name.present?
+            = user.full_name
+          - else
+            %span.grey
+              Name is empty
+        %td
+          = user.is_newbie
+        %td
+          = user.created_at
+        %td
+          = user.current_sign_in_at
+        %td
+          = user.sign_in_count
+
+= paginate @inactive_users

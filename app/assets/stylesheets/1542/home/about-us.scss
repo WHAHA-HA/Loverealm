@@ -1,0 +1,319 @@
+.about {
+	font-family: 'Libre Baskerville', Times, serif;
+	margin-top: 47px;
+	background-color: #fff;
+
+	h1 {
+		font-size: 36px;
+		font-weight: 100;
+		margin-top: 80px;
+		padding: 100px 0;
+		text-align: center;
+	}
+
+	.about-header {
+		position: relative;
+		height: 611px;
+		background-image: image-url('about-header.png');
+		background-repeat: no-repeat;
+		-webkit-background-size: 100%;
+		-o-background-size: 100%;
+		background-size: 100%;
+
+		a {
+			color: #fff;
+		}
+
+	}
+
+	ul {
+		text-align: center;
+	}
+
+	ul li {
+		font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+		font-size: 18px;
+		display: inline-block;
+		width: 200px;
+		margin: 0;
+		margin-left: -4px;
+		padding: 15px 20px;
+		list-style-type: none;
+		color: #fff;
+		border-left: 1px solid #000;
+		background-color: $primary-color;
+
+		&:first-child {
+			border: none;
+		}
+
+	}
+
+	.about-loverealm {
+		font-size: 40px;
+		position: absolute;
+		bottom: -40px;
+		left: 50%;
+		width: 360px;
+		height: 140px;
+		margin-left: -180px;
+		padding-top: 20px;
+		text-align: center;
+		color: #000;
+		background-color: #fff;
+	}
+
+	.about-founder {
+		width: 1020px;
+		margin: 0 auto;
+		padding: 170px 0 50px;
+
+		.founder {
+			width: 336px;
+			height: 336px;
+			margin-right: 35px;
+			-webkit-border-radius: 50%;
+			border-radius: 50%;
+			background-image: image-url('yaw.png');
+			-webkit-background-size: 100%;
+			-o-background-size: 100%;
+			background-size: 100%;
+		}
+
+		.founder-text {
+			width: 63%;
+		}
+
+		.founder-text h3 {
+			font-size: 30px;
+			font-weight: 100;
+			margin-bottom: 15px;
+		}
+
+		.founder-text p {
+			font-size: 20px;
+		}
+
+	}
+
+	.about-bible {
+		margin-bottom: 150px;
+		padding: 0 50px;
+
+		.text {
+			font-size: 20px;
+			margin-right: 2%;
+		}
+
+		.text-wide {
+			font-size: 20px;
+			margin-top: 50px;
+		}
+
+		p + p {
+			margin-top: 20px;
+		}
+
+		h4 {
+  		margin-top: 40px;
+	    font-size: 20px;
+		}
+
+		h3 {
+			margin: 50px 0 30px;
+		}
+
+		img {
+			width: 100%;
+		}
+
+	}
+
+	.about-team {
+		background-color: #e6e6e6;
+
+		.meet-team {
+			font-size: 40px;
+			position: relative;
+			top: -15px;
+			width: 320px;
+			margin: 0 auto;
+			padding: 20px;
+			text-align: center;
+			color: #000;
+			background-color: #fff;
+		}
+
+		.avatar-content {
+			padding: 100px 0 30px;
+			text-align: center;
+		}
+
+		.avatar {
+			position: relative;
+			display: inline-block;
+			width: 245px;
+			height: 245px;
+			margin-bottom: 110px;
+			margin-left: 110px;
+			-webkit-border-radius: 50%;
+			border-radius: 50%;
+			background-repeat: no-repeat;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			background-position: center 0;
+
+			&.yaw {
+				background-image: image-url('yaw-img.png');
+			}
+
+			&.bojan {
+				background-image: image-url('bojan-img.jpg');
+			}
+
+			&.ansah {
+				background-image: image-url('solomon-img.jpg');
+			}
+
+			&.yawsnr {
+				background-image: image-url('ansongsnr-img.jpg');
+			}
+
+			&.dufie {
+				background-image: image-url('dufie-img.jpg');
+			}
+
+			&:nth-child(3n+1) {
+				margin-left: 0;
+			}
+
+			span {
+				font-size: 20px;
+				position: absolute;
+				bottom: -80px;
+				left: 0;
+				width: 100%;
+				text-align: center;
+			}
+
+		}
+
+		.others {
+	    font-size: 22px;
+	    text-align: center;
+	    max-width: 800px;
+	    padding: 30px;
+	    margin: 0 auto;
+		}
+
+	}
+
+	.about-history {
+		padding: 100px 90px;
+
+		h3 {
+			font-size: 40px;
+			font-weight: 100;
+			margin-bottom: 60px;
+			padding: 20px;
+			text-align: center;
+			text-align: center;
+			color: #000;
+			background-color: #fff;
+		}
+
+		p {
+			font-size: 20px;
+			margin-bottom: 20px;
+		}
+
+		.pictures {
+			margin-top: 50px;
+			text-align: center;
+		}
+
+		.picture {
+			font-size: 20px;
+			line-height: 290px;
+			display: inline-block;
+			width: 290px;
+			height: 290px;
+			margin-left: 30px;
+			border: 4px solid #000;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			-webkit-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			background-position: 0 center;
+
+			&:first-child {
+				margin-left: 0;
+			}
+
+			&.history-one {
+				background-image: image-url('history1.jpg');
+			}
+
+			&.history-two {
+				background-image: image-url('history2.jpg');
+			}
+
+			&.history-three {
+				background-image: image-url('history3.jpg');
+			}
+
+			&.history-four {
+				background-image: image-url('history4.jpg');
+			}
+
+			&.history-five {
+				background-image: image-url('history5.jpg');
+			}
+
+			&.history-six {
+				background-image: image-url('history6.png');
+			}
+
+		}
+
+	}
+
+	.join-us {
+		padding: 150px 0;
+		text-align: center;
+		background-color: #e6e6e6;
+
+		h4 {
+			font-weight: 100;
+		}
+
+		h4,
+		p {
+			font-size: 35px;
+		}
+
+		p {
+			padding: 10px 0;
+			text-transform: uppercase;
+		}
+
+		.join-btn {
+			font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+			display: inline-block;
+			padding: 5px 10px;
+			cursor: pointer;
+			border: 2px solid #c14744;
+
+			&:hover, &:focus {
+				color: #fff;
+				background-color: #c14744;
+				text-decoration: none;
+			}
+		}
+
+	}
+
+}

@@ -1,0 +1,71 @@
+.invitation-options {
+  margin: 30px 0;
+}
+
+.btn-invite {
+  &.gmail {
+    background-color: #DB4437;
+    color: #fff;
+  }
+
+  &.facebook {
+    background-color: #3B5998;
+    color: #fff;
+  }
+}
+
+.btn-invite-lg {
+  font-size: 16px;
+  padding: 10px 30px;
+}
+
+.toggle-invitation-label {
+  margin-left: 10px;
+}
+
+#invitations {
+  margin: 0 -10px;
+
+  .user-invitation-card {
+    display: inline-block;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .3);
+    margin: 10px;
+    width: 212px;
+    float: left;
+    transition: background-color .2s ease-out;
+
+    &.highlighted {
+      background-color: #feffc4;
+    }
+  }
+}
+
+.invitation-header {
+  max-width: 600px;
+  margin: 50px auto 0;
+  text-align: center;
+
+  h1 {
+    font-size: 30px;
+  }
+
+  blockquote {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  p {
+    font-size: 15px;
+  }
+}
+
+.invitation-buttons {
+  .btn-invite {
+    padding: 15px 30px;
+    font-size: 18px;
+  }
+}

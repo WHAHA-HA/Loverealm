@@ -1,0 +1,83 @@
+%html.no-js{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}/
+    -#= javascript_include_tag "#{ENV['FAYE_URL']}/faye.js"
+    = display_meta_tags site: t('site_name'), reverse: true, separator: '|'
+    = stylesheet_link_tag    'application', media: 'all'
+    %link{:href => "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+    %meta{:content => "#{ENV['FACEBOOK_KEY']}", :property => "fb:app_id"}/
+    %meta{:content => "com.loverealm.loverealmmobile", :property => "al:android:package"}/
+    %meta{:content => "LoveRealm", :property => "al:android:app_name"}/
+    - if current_user
+      %meta{:name => "cryptedHash", :content => "#{current_user.crypted_hash}"}/
+    %meta{:name => "commonHash", :content => "#{ENV['COMMON_CHANNEL']}"}/
+    %meta{:name => "fayeURL", :content => "#{ENV['FAYE_URL']}"}/
+    = favicon_link_tag "logo-simple.png"
+    = csrf_meta_tags
+    - body_class = "#{params[:controller]}/#{params[:action]}".split('/').join(' ')
+    :javascript
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-77293683-1', 'auto');
+      ga('send', 'pageview');
+
+    - if track_conversion?
+      = render '/shared/trackers/facebook_conversion_pixel'
+
+  %body{class: "#{body_class}"}
+
+    - if show_splash_screen?
+      = render 'shared/splash_screen'
+
+
+    - if current_page?('/')
+      = render 'shared/navigation'
+    - elsif !@hide_header
+      = render 'components/header'
+
+    .container.page
+      - flash.each do |key, value|
+        %div{:class => "alert alert-#{key}"}= value
+
+      = yield
+
+    - if user_signed_in?
+      .chat-button{ 'data-id': current_user.id }
+        %span
+          = image_tag "icons/chat-icon.png"
+          Live Chat
+        - if current_user.present? && current_user.unread_messages_count > 0
+          %span.counter
+            = current_user.unread_messages_count
+      = render 'components/chat_box.haml'
+
+    = render 'components/footer'
+
+    = javascript_include_tag 'application'
+
+    .feedback-modal.modal.fade{:role => "dialog"}
+      .modal-dialog
+        / Modal content
+        .modal-content
+          .modal-header
+            %button.close{"data-dismiss" => "modal", :type => "button"} &times;
+            %h4.modal-title Tell us what you think about our app
+          .modal-body.validating-form
+            = simple_form_for Feedback.new do |f|
+              .form-group.clearfix
+                %label Choose subject
+                = f.select :subject, ['Bug/Error', 'Feature Request', 'Suggestion', 'Miscellaneous'], include_blank: false
+              .form-group.clearfix
+                = f.input :description, as: :text, label: "Description"
+              .modal-footer
+                = f.button :submit, "Send Feedback"
+
+    = render '/shared/trackers/google_remarketing_tag'
+
+    - if track_conversion?
+      = render '/shared/trackers/google_conversion_pixel'

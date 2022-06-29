@@ -1,0 +1,4 @@
+%div
+- messages.each do |message|
+  %ul#chat
+    = render partial 'message', locals: { message: message }

@@ -1,0 +1,10 @@
+- if content.try(:feed_item_type) == 'share' && content.try(:feed_item_shared_by)
+  :ruby
+    user = User.find(content.feed_item_shared_by.to_i)
+
+  .content-share-info
+    %span.glyphicon.glyphicon-share{"aria-hidden" => "true"}
+    = link_to user.full_name, dashboard_profile_path(user)
+    shared
+    = link_to "#{content.user.full_name}'s", dashboard_profile_path(content.user)
+    = content.content_type.downcase

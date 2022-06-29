@@ -1,0 +1,20 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Home', dashboard_user_path(current_user)
+  %li Messages
+
+%h2 Inbox
+
+.row
+  .col-md-2
+    = render 'sidebar'
+
+  .col-md-10
+    .message-list
+      = render partial: 'message_list', locals: { conversations: @conversations }
+
+    - if @conversations.next_page
+      .text-center
+        = link_to url_for(page: @conversations.next_page), class: 'btn btn-primary load-more' do
+          %span.glyphicon.glyphicon-refresh.spinning
+          Vew more

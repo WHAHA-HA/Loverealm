@@ -1,0 +1,30 @@
+%div.actions.inbox-main
+  %h2 Inbox
+  %br.clear
+  .content.clearfix
+    %ul.inbox-list
+      %li
+        %a.inbox-links{:href=>"#"} New Message
+      %li
+        %a.inbox-links.active{:href=>"#"} Inbox (current_user.get_list_of_messages.count)
+      %li.new-inbox
+        %a.inbox-links.active{:href=>"#"} Sent messages
+      %li.new-inbox
+        %a.inbox-links{:href=>"#"} Trash (4)
+    - @messages.each do |message|
+      .list
+        .message-item.clearfix
+          .box-image
+            = show_avatar(get_last_message_from(message)[:user], "thumb")
+          .message-box
+            %p.name #{get_last_message_from(message)[:user].full_name}
+            %p.date #{pretty_time get_last_message_from(message)[:message].created_at}
+            .clear
+            %p.text #{shortik(get_last_message_from(message)[:message].body, 80)}
+          .clear
+          .buttons-box.clearfix
+            %button.pull-right.first
+              = link_to "Move to Trash",""
+            %button.pull-right
+              = link_to "Show Conversation", conversation_dashboard_messages_path( get_last_message_from(message)[:user].id)
+

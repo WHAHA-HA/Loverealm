@@ -1,0 +1,205 @@
+.press-new {
+	font-family: "Libre Baskerville", Times, serif;
+	margin-top: 48px;
+
+	.left-section {
+    width: 200px;
+    height: 154px;
+
+		ul {
+			list-style-type: none;
+	    padding: 10px 50px;
+    	background-color: #fff;
+	    width: 200px;
+
+  		&.fixed {
+  			position: fixed;
+  			top: 145px;
+  		}
+		}
+
+		li {
+			border-bottom: 1px solid;
+			text-align: center;
+			margin-bottom: 15px;
+			padding-bottom: 5px;
+		}
+
+		a {
+			color: #000;
+		}
+	}
+
+	.right-section {
+		width: 75%;
+		padding: 30px;
+		background-color: #fff;
+
+		// .articles {
+		// 	border-bottom: 1px solid;
+		// 	article {
+		// 		margin-bottom: 40px;
+		// 	}
+		// }
+
+		// .articles h1 {
+		// 	margin: 0;
+		// 	font-size: 35px;
+		// 	color: $primary-color;
+		// }
+
+		// .articles .date {
+		// 	color: #e6e6e6;
+		// 	font-style: italic;
+		// 	font-size: 30px;
+		// }
+
+		// .articles a {
+		// 	font-style: italic;
+		// }
+	}
+
+	.view-all {
+		border: 2px solid $primary-color;
+	    margin: 35px auto;
+	    padding: 10px 6px;
+	    width: 130px;
+	    height: 36px;
+	    font-size: 14px;
+	    line-height: 12px;
+	    cursor: pointer;
+	}
+
+	// .visuals {
+	// 	padding: 40px 0 55px;
+	// 	border-bottom: 1px solid;
+	// 	text-align: center;
+
+	// 	> div {
+	// 		display: inline-block;
+	// 		margin-bottom: 25px;
+	// 		&:nth-child(1n+1) {
+	// 			margin-left: 25px;
+	// 		};
+	// 	}
+
+	// 	p {
+	// 		border-bottom: 2px solid;
+	// 		font-size: 30px;
+	// 		margin: 0 90px 25px;
+	// 	}
+	// }
+
+	// .screenshots div , .high-res div , .logos div , .videos div {
+	// 	width: 386px;
+	// 	height: 255px;
+	// 	background-repeat: no-repeat;
+	// 	background-position: center;
+	// }
+
+	// .screenshots div {
+	// 	background-image: image-url("screenshots.jpg");
+	// }
+
+	// .high-res div {
+	// 	background-image: image-url("high-resolution.jpg");
+	// }
+
+	// .logos div {
+	// 	background-image: image-url("love-realm-logo.jpg");
+	// }
+
+	// .videos div {
+	// 	background-image: image-url("screenshots.jpg");
+	// 	position: relative;
+	// 		.play-btn {
+	// 			position: absolute;
+ //    			width: 60px;
+ //    			height: 58px;
+ //   				background-image: image-url("play-btn.png");
+ //    			left: 50%;
+ //    			top: 50%;
+ //    			margin-top: -26px;
+ //    			margin-left: -30px;
+ //    		}
+	// }
+
+	// .founder {
+	// 	div {
+	// 		padding: 70px 0 140px;
+	// 		border-bottom: 1px solid;
+	// 	}
+
+	// 	p {
+	// 		font-size: 25px;
+	// 	}
+
+	// 	h1 {
+	// 		margin: 80px 0 0 0;
+	// 	}
+
+	// 	img {
+	// 		margin-right: 50px;
+	// 	}
+	// }
+
+	.links {
+		p {
+			font-size: 26px;
+			text-align: center;
+			margin-bottom: 50px;
+		}
+
+		a {
+			font-style: italic;
+		}
+
+	}
+
+	.contact {
+		p {
+			font-size: 26px;
+			text-align: center;
+			color: #585858;
+		}
+	}
+
+}
+
+
+.press {
+	h3 {
+		font-size: 36px;
+    text-align: center;
+    margin: 150px 0 60px;
+	}
+}
+
+#press {
+	font-size: 16px;
+
+	h1 {
+		font-size: 36px;
+    text-align: center;
+    margin-bottom: 30px;
+	}
+
+	.subheading {
+		font-weight: bold;
+		margin: 30px 0 20px;
+	}
+
+	h4 {
+    text-decoration: underline;
+    margin: 40px 0 20px;
+	}
+
+	.pub-links {
+    margin-top: 50px;
+
+    p {
+    	font-size: 18px;
+    	margin-top: 24px;
+    }
+	}
+}

@@ -1,0 +1,42 @@
+%div.cbp-spmenu.cbp-spmenu-vertical.cbp-spmenu-right
+  .right-menu
+    .right-menu-logo.text-center
+      %a{:href => "#"}
+        = show_avatar current_user, "thumb" if current_user
+        %br
+        = current_user.full_name
+    %ul.right-nav
+      %li.text-center
+        = link_to "DASHBOARD", dashboard_user_path(current_user)
+      %li.separator.text-center
+        |
+      %li.text-center
+        = link_to "INBOX", dashboard_inbox_path(current_user)
+    .logout-wrapper.text-center
+      = link_to "Log Out", destroy_user_session_path, method: :get
+    .notifications
+      .title
+        Notifications
+      .list-items
+        = image_tag "avatar/my_avatar.jpg", height:30, width: 30, align:'left'
+        Josh Miller published a new story The Electricity Industry
+      .list-items
+        = image_tag "avatar/my_avatar.jpg", height: 30, width: 30, align:'left'
+        Eddie Teran, CMT recommended Why I believe in medium.com
+      .list-items
+        = image_tag "avatar/my_avatar.jpg", height:30, width: 30, align:'left'
+        Meng To published your note on From Design to iOS7 prototype
+      .list-items
+        = image_tag "avatar/my_avatar.jpg", height:30, width: 30, align:'left'
+        Josh Miller published a new story The Electricity Industry
+      .list-items
+        = image_tag "avatar/my_avatar.jpg", height: 30, width: 30, align:'left'
+        Eddie Teran, CMT recommended Why I believe in medium.com
+      .list-items
+        = image_tag "avatar/my_avatar.jpg", height:30, width: 30, align:'left'
+        Meng To published your note on From Design to iOS7 prototype
+
+
+
+
+    

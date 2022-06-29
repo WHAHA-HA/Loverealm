@@ -1,0 +1,39 @@
+en:
+  views:
+    home:
+      index:
+        title: Home
+        description: LoveRealm homepage
+
+    dashboard:
+      users:
+        show:
+          title: Dashboard
+
+      contents:
+        actions:
+          share:
+            caption: Share
+            on_other: Share on other social networks
+
+      shares:
+        internal_link:
+            on_loverealm: Share on loverealm
+            stop_sharing: Stop sharing on Loverealm
+
+    user_mailer:
+      notification_summary:
+        subject:
+          follower_count:
+            one: 'One person followed you on LoveRealm'
+            other: '%{count} people followed you on LoveRealm'
+          notification_count:
+            one: 'You have one new notification on LoveRealm'
+            other: 'You have %{count} new notifications on LoveRealm'
+
+        followed_message:
+          one: 'One new person followed you on LoveRealm:'
+          other: '%{count} new people followed you on LoveRealm . This includes:'
+        summary_message:
+          one: 'You have one new notification on LoveRealm:'
+          other: 'You have %{count} notifications on LoveRealm. These include'

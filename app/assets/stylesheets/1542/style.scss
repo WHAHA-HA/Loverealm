@@ -1,0 +1,185 @@
+body {
+  background: asset-url('main-background-1542.jpg')  no-repeat center center fixed;
+  background-size: cover;
+
+  &.home {
+    background: asset-url('bg-image-1542.jpg')  no-repeat center center fixed;
+    background-size: cover;
+
+    .page {
+      margin-top: 80px;
+    }
+  }
+}
+
+.page {
+  padding-top: 50px;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+form {
+  .file-upload-button {
+    position: relative;
+    overflow: hidden;
+
+    input.upload {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+
+    span.glyphicon {
+      margin-right: 5px;
+    }
+  }
+
+  .file-upload-value {
+    background: transparent;
+    border: 0;
+    padding: 5px 10px;
+    outline: none;
+  }
+
+  .form-group {
+    label.error {
+      font-weight: normal;
+      color: red;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  }
+}
+
+.glyphicon.spinning {
+  animation: spin 1s infinite linear;
+  -webkit-animation: spin2 1s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
+}
+
+@-webkit-keyframes spin2 {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+
+.load-more {
+  span {
+    margin-right: 5px;
+    display: none;
+  }
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+#tags_tagsinput,
+#tags-without-autocomplete_tagsinput {
+  padding: 6px 12px;
+  height: 44px !important;
+  min-height: 44px !important;
+  width: 100% !important;
+  margin-bottom: 15px !important;
+  overflow: hidden;
+}
+
+.container {
+  .breadcrumb {
+    margin-top: 10px;
+    background-color: transparent;
+    padding: 8px 0;
+  }
+
+  .breadcrumb > li + li:before {
+    content: "> ";
+    padding: 0 5px;
+    color: #777;
+  }
+}
+
+.modal {
+  form {
+    margin: 0;
+  }
+
+  .modal-header-primary {
+    background-color: #bb150d;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .modal-body-primary {
+    background-color: #eee;
+  }
+
+  .modal-dialog {
+    margin: 130px auto;
+  }
+}
+
+.row-no-padding {
+  margin: 0;
+
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.error {
+  font-size: 12px;
+  color: red;
+  text-align: left;
+  margin-top: 4px;
+}
+
+.youtube {
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  transition: all 200ms ease-out;
+  cursor: pointer;
+  background-size: cover;
+  width: 100%;
+  height: 360px;
+
+  .play {
+    background: image-url('play-btn.png') no-repeat center center;
+    background-size: 60px 58px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: .8;
+    filter: alpha(opacity=80);
+    transition: all 0.2s ease-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+#toast-container {
+  z-index: 99999;
+}

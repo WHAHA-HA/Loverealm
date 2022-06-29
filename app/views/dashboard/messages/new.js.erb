@@ -1,0 +1,6 @@
+$('.modal').remove();
+$('<%= j render "form" %>').modal();
+$('#receiver_name').typeahead(null, window.receiver_name_typeahead_options)
+  .on('typeahead:selected', function(e, selection) {
+    $('.modal #message_receiver_id').val(selection.id);
+  });

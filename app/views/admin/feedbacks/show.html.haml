@@ -1,0 +1,10 @@
+%div.actions.follow-container
+  %p.big
+  %p.pull-left
+  %h2 Feedback from #{@feedback.user.full_name}
+  .following-container.clearfix
+    .text-holder
+      %i Description
+      %h6 #{@feedback.description}
+      %br
+  = link_to "Back to feedbacks", admin_feedbacks_path

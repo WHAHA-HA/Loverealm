@@ -1,0 +1,22 @@
+%h1 Listing mentors
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Biography
+      %th Mentorship topics
+      %th &nbsp;
+
+  %tbody
+    - @mentors.each do |mentor|
+      %tr
+        %td= mentor.full_name
+        %td= mentor.biography
+        %td= mentor.mentorship_hash_tag.name
+        %td
+          = link_to 'Show Profile', dashboard_profile_path(mentor), class: "btn btn-default"
+          = link_to 'Edit', admin_mentor_path(mentor), class: "btn btn-default"
+          = link_to 'Remove Mentor', admin_mentor_path(mentor), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-default"
+
+  = paginate @mentors

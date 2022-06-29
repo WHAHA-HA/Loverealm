@@ -1,0 +1,15 @@
+= render 'dashboard_header'
+.content-feed
+  = simple_form_for [:dashboard, @story] do |f|
+    = f.input :title, label: false, placeholder: "Name your story", required: true
+    #titleError.error-message
+      Can't be blank
+    .fileUpload.btn.btn-primary
+      %span Add a picture
+      = f.input :image, label: false, required: true, input_html: { id: 'uploadBtn', class: 'upload'}
+    %input#uploadFile{:disabled => "disabled", :placeholder => "Choosen File"}/
+    = f.input :description, as: :bootsy, label: false, required: true, input_html: { rows: 20 }, placeholder: 'Tell your story'
+    = f.input :content_type, as: :hidden, input_html: { value: "story" }
+    %input#tags{:name => "tags", hidden: true, placeholder: 'Add hashtags that describe your story'}/
+    = f.button :button, "Publish", class: "btn btn-primary post-status", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..."}
+

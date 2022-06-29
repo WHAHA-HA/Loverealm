@@ -1,0 +1,33 @@
+.trending-tags {
+  padding: 22px 10px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  margin-bottom: 30px;
+
+  .heading {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 11px;
+
+    .now {
+      font-size: 22px;
+      line-height: 1;
+    }
+  }
+
+  ul#tag-list {
+    -webkit-column-count: 8;
+    -moz-column-count: 8;
+    column-count: 8;
+    -webkit-column-gap: 0;
+    -moz-column-gap: 0;
+    column-gap: 0;
+
+    li {
+      list-style-type: none;
+      color: $primary-color;
+      font-style: italic;
+      flex-basis: 25em;
+    }
+  }
+}

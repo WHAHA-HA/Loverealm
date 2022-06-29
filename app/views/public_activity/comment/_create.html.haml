@@ -1,0 +1,14 @@
+.notification.col-md-6
+  .notification-content.media
+    = link_to dashboard_profile_path(activity.owner), class: 'media-left' do
+      = image_tag activity.owner.avatar.url(:square), class: 'media-object user-avatar'
+
+    .media-body
+      .media-heading
+        = link_to activity.owner.full_name, dashboard_profile_path(activity.owner), class: 'user-name'
+
+      .notification-text
+        - if current_user.id == activity.trackable.content.user_id
+          commented your #{link_to activity.trackable.content.content_type.downcase, [:dashboard, activity.trackable.content]}
+        - else
+          left a new comment on #{link_to activity.trackable.content.content_type.downcase, [:dashboard, activity.trackable.content]}

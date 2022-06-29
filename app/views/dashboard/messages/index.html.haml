@@ -1,0 +1,33 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Home', dashboard_user_path(current_user)
+  %li Messages
+
+%h2 Inbox
+
+.row
+  .col-md-2
+    = render 'sidebar'
+
+  .col-md-10
+    .message-list
+      - @messages.each do |message|
+        .row.message.new
+          .col-md-3
+            .message-media.media
+              = link_to dashboard_profile_path(get_last_message_from(message)[:user].id), class: 'media-left' do
+                = show_avatar(get_last_message_from(message)[:user], 'thumb', class: 'media-object user-avatar')
+              .media-body
+                .media-heading
+                  = link_to get_last_message_from(message)[:user].full_name, dashboard_profile_path(get_last_message_from(message)[:user].id), class: 'user-name'
+
+                .message-sent-at
+                  = pretty_time get_last_message_from(message)[:message].created_at
+
+          .col-md-6
+            .message-text
+              = shortik(get_last_message_from(message)[:message].body, 80)
+
+          .col-md-3
+            .message-options
+              = link_to 'Show Conversation', conversation_dashboard_messages_path(get_last_message_from(message)[:user].id), class: 'btn message-option'

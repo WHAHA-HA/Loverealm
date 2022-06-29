@@ -1,0 +1,23 @@
+:css
+  .media-heading {
+    text-align: center;
+    font-size: larger;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .story-card {
+    border-bottom-style: groove;
+  }
+
+%h2 Most Popular Stories
+
+.popular-stories.row
+  - @contents.each do |story|
+    .story-card.col-md-3
+      %h4.media-heading
+        = link_to story.title, dashboard_content_url(story)
+      = link_to dashboard_content_url(story), class: 'media-right' do
+        = image_tag(story.image.url(:medium), class: 'media-object')
+
+= render '/shared/mailer/unsubscribe'

@@ -1,0 +1,8 @@
+= simple_form_for([:admin, @word]) do |f|
+  = f.error_notification
+
+  .field
+    = f.text_area :name, rows: 7
+
+  .field
+    = f.button :submit

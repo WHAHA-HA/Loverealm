@@ -1,0 +1,9 @@
+.author-info
+  = link_to dashboard_profile_path(user) do
+    = show_avatar user, "thumb", class: 'author-image'
+  .sub-heading
+    STORY TOLD BY
+  .author-name
+    = content_owner user
+  .author-bio
+    = user.biography

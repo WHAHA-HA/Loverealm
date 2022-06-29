@@ -1,0 +1,12 @@
+.profile-options
+  .profile-options-buttons.clearfix
+    = link_to "Status Update", "#", class: 'profile-options-button active', data: { 'toggle-panel' => 'status-panel'}
+    = link_to "Write a Story", new_dashboard_content_path, class: 'profile-options-button'
+    = link_to "Post a Picture", "#", class: 'profile-options-button', data: { 'toggle-panel' => 'picture-panel'}
+
+  .profile-options-panels
+    .option-panel.status-panel.validating-form{'style' => 'display: block;'}
+      = render partial: 'dashboard/contents/status_form', locals: { content: @content }
+
+    .option-panel.picture-panel.validating-form
+      = render partial: 'dashboard/contents/image_form', locals: { content: @content }

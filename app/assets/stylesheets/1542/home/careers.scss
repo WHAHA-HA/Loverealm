@@ -1,0 +1,234 @@
+.careers {
+	font-family: 'Libre Baskerville', Times, serif;
+	margin-top: 24px;
+
+	h1 {
+		margin-bottom: 40px;
+    text-align: center;
+    color: #fff;
+	}
+
+	.careers-header {
+		position: relative;
+		height: 800px;
+		background-image: image-url('mainpix.jpg');
+		background-repeat: no-repeat;
+		background-position: center;
+
+		.openings,
+		.strenghts {
+			position: absolute;
+		}
+
+		.openings {
+			font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+			font-size: 30px;
+			line-height: 90px;
+			top: 220px;
+			left: 50%;
+			width: 250px;
+			height: 90px;
+			margin-left: -125px;
+			cursor: pointer;
+			text-align: center;
+			color: #fff;
+			-webkit-border-radius: 2px;
+			border-radius: 2px;
+			background-color: $primary-color;
+		}
+
+		.strenghts {
+			font-size: 40px;
+			line-height: 130px;
+			bottom: -30px;
+			left: 50%;
+			width: 370px;
+			height: 130px;
+			margin-left: -185px;
+			text-align: center;
+			color: #000;
+			background-color: #fff;
+		}
+
+	}
+
+	.strenghts-holder {
+		> div {
+			position: relative;
+			width: 1022px;
+			height: 336px;
+			margin: 100px auto;
+			background-color: #e6e6e6;
+
+			&:first-child {
+				margin-top: 150px;
+			}
+		}
+
+		.circle-img {
+			position: absolute;
+			top: -22px;
+			width: 388px;
+			height: 388px;
+			-webkit-border-radius: 50%;
+			border-radius: 50%;
+			background-repeat: no-repeat;
+			background-position: 0 center;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+
+		.strenghts-left .text,
+		.strenghts-right .text {
+			width: 60%;
+			padding: 30px;
+
+			h4 {
+				font-size: 30px;
+				font-weight: 100;
+				margin-bottom: 15px;
+			}
+
+			p {
+				font-size: 20px;
+			}
+
+		}
+
+		.strenghts-right .text {
+			float: right;
+		}
+
+		.strenghts-left .text {
+			float: left;
+		}
+
+		.circle-img.first {
+			right: 15px;
+			background-image: image-url('loveculture.jpg');
+		}
+
+		.circle-img.second {
+			left: 15px;
+			background-image: image-url('touchlives.jpg');
+		}
+
+		.circle-img.third {
+			right: 15px;
+			background-image: image-url('autonomy.jpg');
+		}
+
+		.circle-img.four {
+			left: 15px;
+			background-image: image-url('renumeration.jpg');
+		}
+
+	}
+
+	.openings-holder {
+		position: relative;
+		border: 1px solid transparent;
+		background-color: #e6e6e6;
+
+		h3 {
+	    padding: 40px;
+    	text-align: center;
+		}
+
+		.openings-headline {
+			font-size: 40px;
+			line-height: 130px;
+			position: absolute;
+			top: -30px;
+			left: 50%;
+			width: 370px;
+			height: 130px;
+			margin-left: -185px;
+			text-align: center;
+			color: #000;
+			background-color: #fff;
+		}
+
+		.openings-content {
+			margin-top: 300px;
+		}
+
+		.openings-icons {
+			margin-left: 100px;
+
+			> div {
+				font-size: 22px;
+				width: 280px;
+				height: 280px;
+				margin-bottom: 40px;
+				padding-top: 170px;
+				cursor: pointer;
+				text-align: center;
+				border: 2px solid transparent;
+				background-color: #fff;
+				background-repeat: no-repeat;
+				background-position: center 0;
+
+				&:hover {
+					border: 2px solid #c91712;
+				}
+
+			}
+
+			.cog {
+				background-image: image-url('careers-cog.png');
+			}
+
+			.brackets {
+				background-image: image-url('careers-brackets.png');
+			}
+
+			.idea {
+				background-image: image-url('careers-idea.png');
+			}
+
+			.sound {
+				background-image: image-url('careers-sound.png');
+			}
+
+			.camera {
+				background-image: image-url('careers-camera.png');
+			}
+
+		}
+
+		.openings-text {
+			width: 600px;
+			margin-right: 100px;
+			padding: 50px 40px;
+			background-color: #fff;
+
+			h4 {
+				font-size: 30px;
+				font-weight: 100;
+				margin-bottom: 30px;
+			}
+
+			p {
+				font-size: 20px;
+				margin-bottom: 30px;
+			}
+
+			.positions {
+				font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+				font-size: 18px;
+				width: 160px;
+				margin: 0 auto;
+				padding: 10px 0;
+				cursor: pointer;
+				text-align: center;
+				border: 2px solid #c91712;
+			}
+
+		}
+
+	}
+
+}

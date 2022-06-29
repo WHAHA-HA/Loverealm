@@ -1,0 +1,15 @@
+.user-image-form-wrapper.clearfix
+  .current-user-image
+    = image_tag current_user.avatar.url(:square), class: 'media-object user-avatar'
+
+  = simple_form_for(current_user, url: profile_avatar_dashboard_user_path(current_user), multipart: true, method: :put, remote: true, html: { class: 'current-user-image-form' }) do |f|
+    .form-group
+      %h3 Upload your profile picture
+
+    .form-group
+      .btn.btn-default.file-upload-button{'data-autosubmit' => 'true', 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i> Uploading"}
+        %span
+          %span.glyphicon.glyphicon-picture
+          Select file
+        = f.input_field :avatar, label: false, required: true, class: :upload
+      %input#upload-file{disabled: "disabled", placeholder: "Choose File", required: true, class: 'file-upload-value'}

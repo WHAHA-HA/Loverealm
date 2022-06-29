@@ -1,0 +1,16 @@
+%h2 Hello,
+
+%br 
+
+%p
+  It’s me, #{@sender.full_name}. 
+%p I checked out #{link_to "LoveRealm", root_url}, the social network which connects believers worldwide and I was really inspired. The network has also granted me one-on-one access to professional counselors.
+
+%p I’m personally inviting you to Join me on #{link_to "LoveRealm", root_url}
+
+%p
+%div.regards
+  Kind Regards,
+  .sender
+    = @sender.full_name
+

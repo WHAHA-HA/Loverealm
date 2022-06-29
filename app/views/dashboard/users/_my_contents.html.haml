@@ -1,0 +1,13 @@
+%div.news-feed
+  - @my_contents.each do |content|
+    %div.title
+      %h3
+        = content.try(:title) || content.try(:description)
+    %br
+    = posted_time content
+    %div.content
+      %br
+        = content.try(:body)
+      %br  
+        = image_tag(content.post_image, weight: 500, height: 500) if !content.try(:post_image_url).nil?
+    %hr

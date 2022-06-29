@@ -1,0 +1,11 @@
+.notification.col-md-6
+  .notification-content.media
+    = link_to dashboard_profile_path(activity.recipient), class: 'media-left' do
+      = show_avatar activity.recipient, "thumb", class: 'media-object user-avatar'
+
+    .media-body
+      .media-heading
+        = link_to activity.recipient ? activity.recipient.full_name : 'Guest', dashboard_profile_path(activity.recipient), class: 'user-name'
+
+      .notification-text
+        is now following you

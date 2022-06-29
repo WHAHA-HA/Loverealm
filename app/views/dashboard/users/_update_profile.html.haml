@@ -1,0 +1,43 @@
+= render 'upload_profile_avatar'
+.validating-form.user-settings-wrapper
+  = simple_form_for(current_user, url: dashboard_user_path(current_user), html: { method: :put }) do |f|
+    .form-heading
+      Update your details
+
+    .form-body
+      = f.error_notification
+      .row.form-group
+        .col-xs-6
+          = f.input :first_name, label: false, required: true
+        .col-xs-6
+          = f.input :last_name, label: false, required: true
+
+      .row.form-group
+        .col-xs-6
+          = f.input :email, as: :email, label: false
+
+        .col-xs-6
+          = f.input :country, as: :country, label: false, class: "country-select chosen-select", prompt: 'Select country'
+      .row.form-group
+        .col-xs-6
+          = f.input :sex, as: :select, collection: @sexs, label: false, class: "chosen-select", prompt: 'Select gender'
+
+        .col-xs-6
+          = datepicker_helper f, :birthdate, current_user.try(:birthdate), "Select your birthdate:"
+
+      = f.input :biography, as: :text, label: false, required: true, minlength: 30
+
+      .row.form-group
+        .col-xs-4
+          = f.label "Receive messages only from people I'm following", :class => "wider"
+          = f.input :receive_messages_only_from_followers, as: :radio_buttons, label: false
+        .col-xs-4
+          = f.label "Receive e-mail notifications", :class => "wider"
+          = f.input :receive_notification, as: :radio_buttons, label: false
+
+      = f.association :hash_tags, as: :text, label: 'Topics you’re interested in', input_html: { id: 'tags', name: 'tags', value: @hash_tags }
+
+    .form-actions.clearfix
+      = f.button :submit, "Save changes", :class => "button-save pull-right"
+- if current_user.require_password?
+  = render 'shared/reset_password'

@@ -1,0 +1,37 @@
+/**
+ * Bootstrap components styling
+ */
+
+$border-radius-base: 0;
+$border-radius-small: 0;
+$border-radius-large: 0;
+
+$btn-primary-color: $brand-primary;
+$btn-primary-bg: #fff;
+$btn-primary-border: $brand-primary;
+
+$btn-default-color: $LR-black;
+$btn-default-border: $LR-black;
+$btn-default-bg: #fff;
+
+$input-color: $LR-red;
+$input-border: $LR-red;
+$input-color-placeholder: $LR-red;
+$input-border-focus: lighten($LR-red,10%);
+
+$navbar-default-bg: #fff;
+$navbar-default-border: $LR-red;
+
+.btn.btn-primary:hover, .btn.btn-primary:focus,
+.btn.btn-primary:active, .btn.btn-primary.active,
+.open > .btn.btn-primary.dropdown-toggle {
+	color: #fff;
+	background-color: $LR-red;
+}
+
+.btn.btn-default:hover, .btn.btn-default:focus,
+.btn.btn-default:active, .btn.btn-default.active,
+.open > .btn.btn-default.dropdown-toggle {
+	background-color: $LR-deep-ash;
+	color: #fff;
+}

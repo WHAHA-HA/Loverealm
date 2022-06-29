@@ -1,0 +1,16 @@
+.mobile-app-promo
+  .row
+    .col-sm-6.col-sm-push-6
+      .mobile-app-promo-image
+        = image_tag 'android-template.png'
+
+    .col-sm-6.col-sm-pull-6
+      .mobile-app-promo-desc
+        %h1 Download the app
+        %p
+          Get the LoveRealm app on your mobile phone.
+          %br
+          Never miss an update
+
+        = link_to 'https://play.google.com/store/apps/details?id=com.loverealm.loverealmmobile', class: 'app-market-image' do
+          = image_tag "google_play_badge.png"

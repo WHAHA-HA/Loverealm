@@ -1,0 +1,49 @@
+.user-image-form-wrapper {
+  margin: 30px 0;
+
+  .current-user-image {
+    float: left;
+
+    img {
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 50%;
+      width: 110px;
+      height: 110px;
+    }
+  }
+
+  .current-user-image-form {
+    padding-left: 150px;
+
+    h3 {
+      font-weight: normal;
+    }
+  }
+}
+
+.user-settings-wrapper {
+  margin-bottom: 30px;
+
+  .form-heading {
+    background-color: #fff;
+    padding: 10px;
+    text-align: center;
+    color: #c6130d;
+    font-size: 24px;
+  }
+
+  .form-body {
+    background-color: #e7e5d6;
+    padding: 20px;
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-actions {
+    background-color: #fff;
+    padding: 20px;
+  }
+}

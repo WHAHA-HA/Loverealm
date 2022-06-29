@@ -1,0 +1,31 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  pool: 5
+  timeout: 5000
+  adapter: postgresql
+  username: <%= ENV['LR_DB_USERNAME'] %>
+  password: <%= ENV['LR_DB_PASSWORD'] %>
+
+development:
+  <<: *default
+  database: loverealm_development
+
+staging:
+  <<: *default
+  database: loverealm_staging
+
+test:
+  <<: *default
+  database: loverealm_test
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+production:
+  <<: *default
+  database: loverealm_production

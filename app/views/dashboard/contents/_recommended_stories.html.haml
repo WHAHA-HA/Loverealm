@@ -1,0 +1,6 @@
+- if recommended_stories.present?
+  .recommended-content-wrapper
+    %h3 Recommended Stories
+
+    .recommended-content-list.row
+      = render partial: 'dashboard/contents/story/card', collection: recommended_stories, as: :story

@@ -1,0 +1,6 @@
+%h2 Reports for #{@report.target.full_name}
+.text-holder
+  %i Description
+  %p #{@report.description}
+
+= link_to 'Ban user', process_report_admin_report_path(@report), method: :post, class: 'btn btn-default'

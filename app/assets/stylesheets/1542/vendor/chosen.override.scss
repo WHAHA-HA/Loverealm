@@ -1,0 +1,26 @@
+.chosen-search {
+  display: none !important;
+}
+
+.chosen-container.chosen-container-single {
+  background: #fff;
+  color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  a, a.chosen-single {
+    background: transparent;
+    border: 0;
+    box-shadow: 0 0;
+    border-radius: 0;
+    height: 34px;
+    padding-left: 12px;
+
+    span {
+      color: #555;
+      font-size: 14px;
+      margin-top: 5px;
+      text-align: left;
+    }
+  }
+}

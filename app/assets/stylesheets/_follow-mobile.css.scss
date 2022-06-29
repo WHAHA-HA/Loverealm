@@ -1,0 +1,48 @@
+@media only screen and (max-width:768px) {
+
+	.follow-container {
+		h2 {
+			font-size: 18px;
+			position: fixed;
+			width: 100%;
+			top: 0;
+			z-index: 10000;
+		}
+
+		h6 {
+			font-size: 14px;
+		}
+
+		img {
+			width: 40px !important;
+			height: 40px !important;
+		}
+
+		.text-holder {
+			width: 65%;
+		}
+
+		.following {
+			width: 40px;
+			height: 40px;
+			color: transparent !important;
+		}
+	}
+
+	.follower-container, .following-container {
+		width: 100%;
+		
+		.following, .follower {
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+	}
+
+	.following-container .following { 
+		background-image: image-url("minus.png");	
+	}
+
+	.follower-container .follower {
+		background-image: image-url("plus.png");
+	}
+}

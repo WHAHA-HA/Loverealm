@@ -1,0 +1,115 @@
+.profile-header {
+  background-color: #fff;
+
+  .user-about {
+    background-color: #c8140f;
+    padding: 20px;
+    color: #fff;
+
+    .user-name {
+      margin: 0;
+      font-weight: normal;
+    }
+
+    .user-bio {
+      margin-top: 5px;
+    }
+  }
+
+  .profile-info {
+    padding: 20px;
+
+    .user-stats {
+      .user-stat-item {
+        padding: 8px 21px;
+        margin: 0;
+      }
+    }
+
+    .profile-menu {
+      margin-top: 12px;
+
+      .btn {
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 0;
+        transition: all .1s ease-out;
+        color: #c8140f;
+
+        &:hover {
+          background-color: #eee;
+          border-color: #aaa;
+        }
+      }
+
+      .btn + .btn {
+        margin-left: 10px;
+      }
+
+      .message-button::before,
+      .relationship-button::before,
+      .report-button::before {
+        content: ' ';
+        background: asset_url('profile-menu-1542.png') no-repeat;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        margin-right: 7px;
+        vertical-align: bottom;
+      }
+
+      .message-button::before {
+        background-position: 0 0;
+        width: 24px;
+      }
+
+      .relationship-button::before {
+        background-position: -25px 0;
+        width: 19px;
+      }
+
+      .report-button::before {
+        background-position: -45px 0;
+        width: 13px;
+      }
+    }
+  }
+
+  .profile-cover-wrapper {
+    position: relative;
+
+    .profile-cover {
+      width: 100%;
+      max-height: 242px;
+      overflow: hidden;
+    }
+
+    .profile-cover-form {
+      position: absolute;
+      bottom: 10px;
+      margin: 0;
+      right: 10px;
+
+      .file-upload-button {
+        background-color: #eee;
+        border-radius: 0;
+        border: 1px solid #a9a9a9;
+        color: #c8140f;
+        padding: 4px 10px;
+
+        &:hover {
+          background-color: #eee;
+        }
+
+        .glyphicon-picture {
+          color: #000;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .btn-profile-cover {
+
+    }
+  }
+}

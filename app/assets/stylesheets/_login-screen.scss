@@ -1,0 +1,251 @@
+/**
+ * Login screen
+ */
+
+$login-screen-ui-size: 18.5em;
+
+.form-signup,
+.form-signin {
+	text-align: center;
+}
+
+
+.form-signup__heading,
+.form-signin__heading {
+	margin-top: 2em;
+	margin-bottom: 0.75em;
+}
+
+.form-login.sidebar-login {
+
+	.form.signup__heading {
+		font-size: 72px;
+	    font-weight: 500;
+	    margin-bottom: 0px;
+	    color: #333;
+	    margin: 0;
+	    line-height: 66px;
+
+	    &.login-form {
+	    	font-size: 33px;
+	    }
+	}
+}
+
+.form.signup__heading {
+	font-size: 72px;
+    font-weight: 500;
+    margin-bottom: 0px;
+    color: #fff;
+    margin: 0;
+    line-height: 66px;
+
+    &.login-form {
+    	font-size: 33px;
+    }
+}
+
+
+.form-signup__intro,
+.form-signin__intro {
+	color: #fff;
+	line-height: 28px;
+	margin-bottom: 2em;
+	font-size: 26px;
+	font-weight: 100;
+}
+
+.fa-facebook::before {
+	content: "" !important;
+}
+
+.btn-facebook.form-signup__btn.main-log .fa-facebook {
+	background-image: image-url("face-icon.png");
+	background-size: 100% auto;
+    display: block;
+    height: 37px;
+    left: -6px;
+    margin-bottom: 0;
+    position: relative;
+    top: -7px;
+    width: 20px;
+}
+
+.btn-facebook.form-signup__btn.main-log .google-icon {
+	background-image: image-url("google-icon.png");
+	background-size: 100% auto;
+    display: block;
+    height: 30px;
+    left: -7px;
+    margin-bottom: 0;
+    position: relative;
+    top: -3px;
+    width: 32px;
+}
+
+
+.form-signup__btn,
+.form-signin__btn {
+	text-transform: uppercase;
+	padding: 1em;
+	margin: 0 auto;
+	font-size: 15px;
+	width: 250px;
+	max-width: 333px !important;
+	font-weight: 300;
+	height: 52px;
+	background: transparent;
+	color: #fff;
+	border-color: #fff;
+
+	&:hover {
+		background: transparent !important;
+		color: #fff !important;
+		border-color: #fff !important;
+	}
+
+	&.btn-facebook {
+		font-weight: 400;
+		letter-spacing: 1px;
+		font-size: 14px;
+		line-height: 23px;
+
+
+		&.sidebar-face {
+			background: #3b5998;
+			font-size: 13px;
+    		width: 333px;
+    		border-color: #3b5998;
+
+    		&.btn-google {
+    			background: #db4437;
+    			border: 1px solid #db2a37;
+
+    			&:hover {
+    				background: #db2a37 !important;
+    			}
+
+    			i {
+    				background-image: image-url("icons/google-plus-32.png");
+					background-size: 100% auto;
+					float: left;
+				    height: 21px;
+				    left: 37px;
+				    position: relative;
+				    top: 3px;
+				    width: 21px;
+    			}
+    		}
+		}
+
+		i {
+			background-image: image-url("icons/fbwhite-icon.png");
+			width: 30px;
+			height: 30px;
+			background-size: 100% auto;
+			float: left;
+			position: relative;
+			top: -4px;
+			left: 30px;
+		}
+
+		&:hover {
+			background: #2d4373 !important;
+			border-color: #2d4373;
+		}
+
+		&.main-log {
+			&:hover {
+				background: transparent !important;
+				border-color: #fff;
+			}
+		}
+	}
+}
+
+.form-signup__btn {
+	max-width: $login-screen-ui-size;
+}
+
+.form-signin__btn {
+	width: 60%;
+	max-width: $login-screen-ui-size/2;
+}
+
+
+.form-signup__btn + .form-signup__btn,
+.form-signin__btn + .form-signin__btn {
+    margin-top: 0.75em;
+}
+
+.form-signup__footer {
+	color: #333;
+	font-size: 13px;
+	margin: 5em auto;
+	font-weight: 100;
+	max-width: 70%;
+	line-height: 22px;
+}
+
+
+.form-signup__footer-icon {
+	background-image: image-url("icons/basics-08-128.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	display: block;
+	width: 5em;
+	height: 5em;
+	margin: 0 auto;
+}
+
+
+.form-signin__intro {
+	font-size: $font-size-base;
+	margin-bottom: 4em;
+
+}
+
+.form-signin__rule {
+	color: $LR-light-ash;
+	margin: 3em 0;
+
+	&:after {
+		content: "OR";
+		display: inline-block;
+		position: relative;
+		top: -0.75em;
+		margin: auto;
+		background: white;
+		width: 2.5em;
+	}
+}
+
+
+.form-signin__form > input {
+	max-width: $login-screen-ui-size;
+	color: $LR-red;
+	border-color: $LR-red;
+	padding: 1em;
+	margin: 1em auto;
+}
+
+
+.form-signin__form > input::placeholder {
+	text-transform: uppercase;
+	color: $LR-red;
+}
+
+.form-signin__form > input::-moz-placeholder {
+	text-transform: uppercase;
+	color: $LR-red;
+}
+
+.form-signin__form > input::-webkit-input-placeholder {
+	text-transform: uppercase;
+	color: $LR-red;
+}
+
+.form-signin__form > input::-ms-input-placeholder {
+	text-transform: uppercase;
+	color: $LR-red;
+}

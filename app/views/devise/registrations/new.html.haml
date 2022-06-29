@@ -1,0 +1,21 @@
+%div.reg-form
+  %h2 Join LoveRealm Today
+  / %span.small-text You're almost there
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    - if resource.errors.any?
+      %div.registration-errors
+        %ul
+          - resource.errors.full_messages.each do |msg|
+            %li= msg
+    .form-inputs
+      = f.input_field :email, required: true, autofocus: true, placeholder: "EMAIL"
+      %br
+      = f.input_field :password, placeholder: "PASSWORD", required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable)
+      %br
+      = f.input_field :password_confirmations, required: true, placeholder: "PASSWORD CONFIRMATION"
+      %br
+    .form-actions
+      = f.button :submit, "Create account", {:class=>"create-btn"}
+      = link_to "< BACK", root_path, {:class=>"back-form"}
+  %br
+  / = render "devise/shared/links"

@@ -1,0 +1,66 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Home', dashboard_user_path(current_user)
+  %li Profile
+
+.profile-header{'data-user-id': @displayed_user.id}
+  .row.row-no-padding
+    .col-md-4
+      .user-about
+        %h1.user-name
+          = title @displayed_user.full_name
+
+        .user-bio.ellipsis
+          = @displayed_user.biography
+
+      .profile-info
+        .user-stats.clearfix
+          .user-stat-item.following
+            .counter
+              = @displayed_user.following.count
+            .caption
+              Following
+
+          .user-stat-item.posts
+            .counter
+              = @displayed_user.contents.count
+            .caption
+              Posts
+
+          .user-stat-item.follower
+            .counter
+              = followers_count @displayed_user
+            .caption
+              Folowers
+        - unless page_owner? @displayed_user
+          .profile-menu
+            = link_to 'Contact', new_dashboard_message_path(receiver_id: @displayed_user.id), remote: true, class: 'btn btn-default message-button'
+
+            = render partial: 'follow_button', locals: { other_user: @displayed_user }
+
+            = link_to 'Report', new_report_path(target_type: :user, target_id: @displayed_user.id), remote: true, class: 'btn btn-default report-button'
+
+            - if current_user.admin?
+              = link_to "Set as Mentor", create_mentor_admin_user_path(@displayed_user), method: :post, class: 'btn btn-default set-as-mentor'
+
+
+    .col-md-8.profile-cover-wrapper
+      = image_tag @displayed_user.cover.url(:medium), class: 'profile-cover'
+
+      - if page_owner? @displayed_user
+        = simple_form_for(current_user, url: profile_cover_dashboard_user_path(current_user), multipart: true, method: :put, remote: true, html: { class: 'profile-cover-form' }) do |f|
+          .btn.btn-default.file-upload-button{'data-autosubmit' => 'true', 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i> Uploading"}
+            %span
+              %span.glyphicon.glyphicon-picture
+              Edit Photo
+            = f.input_field :cover, label: false, required: true, class: :upload
+
+.content-feed
+  #contents
+    = render partial: 'dashboard/contents/list', locals: {contents: @contents}
+
+  - if @contents.next_page
+    .text-center
+      = link_to url_for(page: @contents.next_page), class: 'btn btn-primary load-more' do
+        %span.glyphicon.glyphicon-refresh.spinning
+        Vew more

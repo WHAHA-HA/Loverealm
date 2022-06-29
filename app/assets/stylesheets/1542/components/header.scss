@@ -1,0 +1,116 @@
+header {
+    .navbar-brand {
+      padding: 5px 15px;
+    }
+
+    .navbar-custom {
+        background-color: $primary-color;
+        color: #fff;
+        border-radius: 0;
+        border-width: 0;
+        z-index: 10000;
+    }
+
+    .navbar-custom .navbar-nav > li > a {
+        color: #fff;
+        font-weight: bold;
+        font-size: 13px;
+
+        &:focus,
+        &:hover {
+          background-color: #d62629;
+        }
+    }
+
+    .navbar-custom .navbar-nav > .open > a,
+    .navbar-custom .navbar-nav > .open > a:hover,
+    .navbar-custom .navbar-nav > .open > a:focus {
+      color: #fff;
+      background-color: #d62629;
+    }
+
+    .navbar-custom .navbar-nav > .active > a,
+    .navbar-custom .navbar-nav > .active > a:hover,
+    .navbar-custom .navbar-nav > .active > a:focus {
+        color: #fff;
+        background-color: transparent;
+    }
+
+    .navbar-custom .navbar-nav .open .dropdown-menu {
+        background-color: #790301;
+        color: #fff;
+        border: none;
+        width: 100%;
+        min-width: 0;
+        padding: 0;
+
+        li > a {
+            color: #fff;
+            padding: 10px 16px;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        li + li {
+            border-top: 1px solid #b50604;
+        }
+    }
+
+    .navbar-custom .navbar-brand {
+        color: #eee;
+    }
+
+    .navbar-toggle .icon-bar {
+        background-color: #fff;
+    }
+
+    .header-icon {
+        background-image: asset-url('icons/header-icons-1542.png');
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align:middle;
+        margin-right: 6px;
+        position: relative;
+
+        &.home {
+            background-position: 0 0;
+        }
+
+        &.bell {
+            background-position: -20px 0;
+        }
+
+        &.profile {
+            background-position: -40px 0;
+        }
+
+        &.people {
+            background-position: -60px 0;
+        }
+
+        &.messages {
+            background-position: -80px 0;
+        }
+
+        &.search {
+            background-position: -104px 0;
+        }
+
+        .counter {
+            background-color: #000;
+            height: 16px;
+            width: 16px;
+            display: inline-block;
+            line-height: 16px;
+            text-align: center;
+            border-radius: 50%;
+            font-style: normal;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+    }
+}

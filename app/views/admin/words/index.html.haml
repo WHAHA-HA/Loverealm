@@ -1,0 +1,16 @@
+= link_to 'Add Words', new_admin_word_path
+
+.inner-wrapper
+  %table
+    %thead
+      %tr
+        %th Name
+        %th
+
+    %tbody
+      - @words.each do |word|
+        %tr{id: "word-#{word.id}"}
+          %td= word.name
+          %td= link_to 'Destroy', admin_word_path(word), remote: true, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  = paginate @words

@@ -1,0 +1,4 @@
+$content = $('[data-content-id="<%= @content.id %>"]');
+$content.find('.like-action').addClass('active')
+  .attr('href', '<%= dislike_dashboard_content_path(@content) %>');
+$content.find('.like-action .count').text(function(index, value){ return ++value });

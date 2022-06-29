@@ -1,0 +1,22 @@
+%html.no-js{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+
+    %title= "Admin: #{params[:controller].split('/').last} - #{params[:action]}"
+
+    = stylesheet_link_tag    'application', media: 'all'
+    = csrf_meta_tags
+
+  %body.admin
+    = render 'components/header'
+
+    .container.page
+      = render 'admin/shared/admin_navbar'
+
+      - flash.each do |key, value|
+        %div{:class => "alert alert-#{key}"}= value
+
+      = yield
+
+    = javascript_include_tag 'application'

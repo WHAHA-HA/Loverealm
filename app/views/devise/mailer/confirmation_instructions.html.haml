@@ -1,0 +1,13 @@
+%p
+  Hi there #{@email},
+
+%p You recently registered for a LoveRealm account. To complete your registration, confirm your e-mail address by clicking on this link:
+%p= link_to 'Confirm my account', user_confirmation_url(confirmation_token: @token)
+
+%p
+  LoveRealm is a Christian social network that connects Christians worldwide.
+
+%p
+  Kind Regards,
+%br
+  The team at LoveRealm.

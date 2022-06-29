@@ -1,0 +1,54 @@
+@media only screen and (max-width: 768px)  {
+	.feedback h1 {
+		z-index: 10000;
+	    font-size: 18px;
+	    width: 100%;
+	    text-align: center;
+	    margin-left: -15px;
+	    padding: 0;
+	    position: fixed;
+	    margin-top: 10px;
+	}
+
+	.feedback.holder {
+    	margin: 0;
+    	padding: 0;
+    	width: 100%;
+	}
+
+	.feedback .form-box {
+		width: 100%;
+		margin: 0;
+	}
+
+	.feedback h1 + p {
+		width: 90%;
+		padding: 80px 20px 0;
+		margin: 0 auto 20px;
+	}
+
+
+	.feedback .form-box .content-box p, .feedback .form-box textarea {
+		width: 90%;
+		margin: 0 auto;
+		font-size: 12px;
+	}
+
+	.feedback .form-box .content-box p {
+		margin: 10px auto;
+	}
+
+	.feedback .chosen-container.chosen-container-single a.chosen-single span {
+		font-size: 12px;
+	}
+
+	.feedback .chosen-container.chosen-container-single {
+		width: 90% !important;
+		margin: 0 auto;
+		padding: 0;
+	}
+
+	.feedback .form-box input[type="submit"] {
+		font-size: 12px;
+	}
+}

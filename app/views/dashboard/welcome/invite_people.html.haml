@@ -1,0 +1,22 @@
+.welcome-step-wrapper
+  .step-heading
+    .heading Invite your friends
+
+  %blockquote.verse
+    Then the master told his servant, 'Go out to the roads and country lanes and compel them to come in, so that my house will be full.'
+    %footer Luke 14:23
+
+  = render '/dashboard/invites/invitation_options'
+  = form_tag dashboard_welcome_send_invitations_path do
+
+    .text-left
+      = label_tag :toggle_invitations, class: 'toggle-invitation-label hidden' do
+        = check_box_tag :toggle_invitations, :show_all, checked: true
+        Select all
+
+    .form-group
+      = render '/dashboard/invites/invitation_container'
+
+    .text-right.form-group
+      = submit_tag 'Finish!', class: 'btn btn-primary'
+

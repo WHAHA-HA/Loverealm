@@ -1,0 +1,25 @@
+:ruby
+  set_meta_tags og: {
+    title: shortik(@content.description, 100),
+    image: @content.user.avatar.url(:medium)
+  }
+
+
+.content.content-full.status{'data-content-id' => @content.id}
+  .text-center
+    %time
+      = posted_time @content
+
+  .content-body
+    .status-content-text
+      = auto_link title @content.description.html_safe
+
+    = render partial: 'author_info', locals: { user: @content.user }
+
+  .content-footer.clearfix
+    = render partial: 'dashboard/contents/actions', locals: { content: @content }
+    = render partial: 'dashboard/contents/tags', locals: { content: @content }
+
+  = render partial: 'dashboard/contents/card_comments', locals: { content: @content }
+
+= render partial: 'recommended_stories', locals: { recommended_stories: @recommended_stories }

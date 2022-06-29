@@ -1,0 +1,5 @@
+$('#image-edit-modal').remove();
+$modalBody = $('<div class="modal-body"><%= j render partial: "image_form", locals: { content: @content } %></div>');
+$modal = $('<div class="modal" id="image-edit-modal"><div class="modal-dialog"><div class="modal-content"></div></div></div>');
+$modal.find('.modal-content').html($modalBody);
+$modal.modal();

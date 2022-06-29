@@ -1,0 +1,87 @@
+/**
+ * Colors
+ *
+ * Colours: Red ($primary-color), Black (#000000), Light Ash (#DADADE), Deep ash (#535156)
+ */
+
+
+/*doc
+---
+title: Colors
+name: colors
+category: Base
+---
+We have a few colors that can be used in various contexts.
+These are not for use as the entire page background but instead for
+specific components and modules on the page.
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-3 col-xs-6">
+        <div style="height:9em;" class="background-lr-red"></div>
+        <pre class="text-center">$LR-red: $primary-color;</pre>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <div style="height:9em;" class="background-lr-black"></div>
+        <pre class="text-center">$LR-black: #000;</pre>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <div style="height:9em;" class="background-lr-light-ash"></div>
+        <pre class="text-center">$LR-light-ash: #dadade;</pre>
+      </div>
+      <div class="col-sm-3 col-xs-6">
+        <div style="height:9em;" class="background-lr-deep-ash"></div>
+        <pre class="text-center">$LR-deep-ash: #535156;</pre>
+      </div>
+  </div>
+</div>
+*/
+
+/* Redefining bootstrap colors */
+$LR-red: $primary-color;
+$LR-black: #000;
+$LR-white: #FFF;
+$LR-light-ash: #dadade;
+$LR-deep-ash: #535156;
+$LR-facebook: #3b5998;
+
+$brand-primary: $LR-red;
+
+.lr-red {
+	color: $LR-red;
+}
+
+.background-lr-red {
+	background-color: $LR-red;
+}
+
+.lr-black {
+	color: $LR-black;
+}
+
+.background-lr-black {
+	background-color: $LR-black;
+}
+
+.lr-light-ash {
+	color: $LR-light-ash;
+}
+
+.background-lr-light-ash {
+	background-color: $LR-light-ash;
+}
+
+.lr-deep-ash {
+	color: $LR-deep-ash;
+}
+
+.background-lr-deep-ash {
+	background-color: $LR-deep-ash;
+}
+
+.lr-facebook {
+	color: $LR-facebook;
+}
+
+.background-lr-facebook {
+	background-color: $LR-facebook;
+}

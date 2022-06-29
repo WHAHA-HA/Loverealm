@@ -1,0 +1,9 @@
+.comment-form
+  .comment-author-image
+    = show_avatar(current_user, 'thumb')
+
+  .comment-content.validating-form
+    = simple_form_for comment, url: dashboard_comments_path(comment.content), remote: :true do |f|
+      = f.input_field :content_id, as: :hidden, required: true, value: comment.content.id
+      = f.input :body, as: :text, label: false, required: true, disabled: current_user.nil?, placeholder: current_user.nil? ? 'Please Log in to post a comment.' : ''
+      = f.button :button, 'Comment', class: 'btn btn-primary', disabled: current_user.nil?, data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Submitting..."}

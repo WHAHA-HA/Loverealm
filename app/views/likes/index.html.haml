@@ -1,0 +1,25 @@
+%h1 Listing likes
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Story
+      %th Post status
+      %th
+      %th
+      %th
+
+  %tbody
+    - @likes.each do |like|
+      %tr
+        %td= like.user_id
+        %td= like.story_id
+        %td= like.post_status_id
+        %td= link_to 'Show', like
+        %td= link_to 'Edit', edit_like_path(like)
+        %td= link_to 'Destroy', like, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Like', new_like_path

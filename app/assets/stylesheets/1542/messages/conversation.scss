@@ -1,0 +1,47 @@
+.conversation {
+  h3 {
+    margin: 0;
+    font-weight: normal;
+  }
+
+  .message {
+    margin-top: 40px;
+
+    .user-avatar {
+      float: left;
+    }
+
+    .message-content {
+      padding-left: 58px;
+
+      .message-header {
+        color: #777;
+        font-size: 15px;
+
+        .date {
+          color: #000;
+        }
+      }
+
+      .message-text {
+        margin-top: 10px;
+        background-color: #fff;
+        padding: 20px;
+      }
+    }
+
+    &.received-message {
+      .user-avatar {
+        background-color: #cc302b;
+      }
+
+      .message-text {
+        background-color: #eee;
+      }
+    }
+  }
+
+  .reply-form {
+    margin: 30px 0 0 42px;
+  }
+}

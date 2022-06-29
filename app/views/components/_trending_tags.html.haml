@@ -1,0 +1,14 @@
+.trending-tags
+  .row
+    .col-xs-1
+      .heading
+        Trending
+        %span.now
+          NOW
+
+
+    .col-md-11
+      %ul#tag-list
+        - hash_tags.each do |tag|
+          %li.tag
+            = link_to tag.name, dashboard_contents_path(tag_id: tag.id)

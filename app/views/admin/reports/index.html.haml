@@ -1,0 +1,22 @@
+%h2 Reports
+%table.table
+  %thead
+    %tr
+      %th #
+      %th Target
+      %th Created at
+      %th Actions
+
+  %tbody
+    - @reports.each do |report|
+      %tr
+        %td= report.id
+        %td= report.target_type
+        %td= report.created_at
+        %td
+          - if report.target.present?
+            = link_to 'See report', [:admin, report]
+          - else
+            = "#{report.target_type} already removed."
+
+= paginate @reports

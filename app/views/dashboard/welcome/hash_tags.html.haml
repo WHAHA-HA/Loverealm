@@ -1,0 +1,25 @@
+.welcome-step-wrapper
+  .step-heading
+    .heading Please select topics of interest
+
+  %blockquote.verse
+    But he said to me,  “My grace is sufficient for you, for my power is made perfect in weakness.” Therefore I will boast all the more gladly of my weaknesses,…
+    %footer 2 Corinthians 12:9-10
+
+  = simple_form_for(User.new, url: dashboard_welcome_hash_tags_path) do |f|
+    %p
+      Are you struggling?
+      %br
+      Please select Christian topics of interest from the list below by dragging and dropping them into the box below.
+
+    .suggested-hash-tags
+      .form-group
+        - @hash_tags.each do |ht|
+          %label.checkbox-inline.hash-tag-checkbox
+            = check_box_tag 'hash_tag[]', ht.id, @choosen_tags.include?(ht), id: "hash_tag_#{ht.id}"
+            = ht.name
+
+      = f.association :hash_tags, as: :text, label: 'Cant find a topic of interest above? Add custom topics below (separate them by a comma)', placeholder: 'Type tags', input_html: { id: 'tags-without-autocomplete', name: 'tags', value: @custom_hash_tags }
+
+      .form-group.text-right
+        = f.submit 'Next Step >', class: 'btn welcome-btn'

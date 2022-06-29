@@ -1,0 +1,52 @@
+I"ÿ(function() {
+  $(function() {
+    var expr, formatVideoPrevier, youtubeVideoPreview;
+    expr = /(youtu\.be\/|[?&]v=)([\d\w-]{11})/;
+    formatVideoPrevier = function($element) {
+      $element.css('background-image', "url(http://i.ytimg.com/vi/" + ($element.data('id')) + "/hqdefault.jpg)");
+      return $element.append($('<div/>', {
+        'class': 'play'
+      }));
+    };
+    youtubeVideoPreview = function(id) {
+      return formatVideoPrevier($('<div class="youtube" />').data('id', id));
+    };
+    window.injectYoutubeVideoPreview = function($element) {
+      var match;
+      match = $element.text().match(expr);
+      if (match) {
+        return $element.append(youtubeVideoPreview(match[2].trim()));
+      }
+    };
+    $('.status-content-text').each(function(index, status) {
+      return injectYoutubeVideoPreview($(status));
+    });
+    $('.youtube').each(function(index, element) {
+      return formatVideoPrevier($(element));
+    });
+    $(document).delegate('.youtube', 'click', function() {
+      var $this, iframe, iframe_url;
+      $this = $(this);
+      iframe_url = "https://www.youtube.com/embed/" + ($this.data('id')) + "?autoplay=1&autohide=1&enablejsapi=1&iv_load_policy=3";
+      if ($this.data('params')) {
+        iframe_url += '&' + $this.data('params');
+      }
+      iframe = $('<iframe/>', {
+        'frameborder': '0',
+        'src': iframe_url,
+        'allowfullscreen': true,
+        'width': '100%',
+        'height': $this.height()
+      });
+      return $this.replaceWith(iframe);
+    });
+    return $(document).on('ajax:success', '.status_in_place', function() {
+      var $element;
+      $element = $(this).parent();
+      $element.find('.youtube, iframe').remove();
+      return injectYoutubeVideoPreview($element);
+    });
+  });
+
+}).call(this);
+:ET

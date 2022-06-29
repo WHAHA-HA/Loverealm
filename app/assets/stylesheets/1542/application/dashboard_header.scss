@@ -1,0 +1,73 @@
+.dashboard-header {
+  margin: 30px auto;
+
+  .user-info {
+    .user-avatar {
+      width: 110px;
+      height: 110px;
+    }
+
+    .user-about {
+      .media-heading {
+        margin-bottom: 0;
+      }
+
+      .user-name {
+        font-size: 26px;
+        font-family: "Libre Baskerville", Times, serif;
+      }
+
+      .user-bio {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .mentor-notification {
+    background-color: #e2e9e3;
+    padding: 10px;
+    border-radius: 7px;
+    border: 2px solid #fff;
+    margin: 6px 0;
+
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+    }
+
+    .user-name {
+      font-size: 14px;
+    }
+
+    .user-message {
+      font-size: 13px;
+      font-weight: bold;
+    }
+  }
+
+  .user-avatar {
+    background-color: #fff;
+    padding: 3px;
+    border-radius: 50%;
+  }
+
+  .user-about {
+    vertical-align: middle;
+  }
+
+  .profile-menu {
+    margin: 30px 0;
+  }
+}
+.feed-updates {
+  display: none;
+  position: fixed;
+  margin-left: 44%;
+  margin-top: 49px;
+  border-color: red;
+  border-style: groove;
+  width: 10%;
+  text-align: center;
+  z-index: 1;
+  background: white;
+}

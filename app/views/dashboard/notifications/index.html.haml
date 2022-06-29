@@ -1,0 +1,14 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Home', dashboard_user_path(current_user)
+  %li Notifications
+
+%h2 Notifications
+- @grouped_activities.each do |key, values|
+  = render partial: 'notification_group', locals: { date: key, activities: values }
+
+- if @activities.next_page
+  .text-center
+    = link_to url_for(page: @activities.next_page), class: 'btn btn-primary load-more' do
+      %span.glyphicon.glyphicon-refresh.spinning
+      Vew more

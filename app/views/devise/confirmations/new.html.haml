@@ -1,0 +1,12 @@
+%div.sign-up-wrapp
+  .form-signup.col-sm-6.login-btn
+    %h2 Resend confirmation instructions
+    = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+      = f.full_error :confirmation_token
+      .form-inputs
+        = f.input_field :email, required: false, autofocus: true, :placeholder => "Email"
+      .form-actions
+        = f.button :submit, "Submit"
+    = render "devise/shared/links"
+
+

@@ -1,0 +1,21 @@
+%h1 Listing hash_tags
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th
+      %th
+      %th
+
+  %tbody
+    - @hash_tags.each do |hash_tag|
+      %tr
+        %td= hash_tag.name
+        %td= link_to 'Show', hash_tag
+        %td= link_to 'Edit', edit_hash_tag_path(hash_tag)
+        %td= link_to 'Destroy', hash_tag, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Hash tag', new_hash_tag_path

@@ -1,0 +1,92 @@
+/**
+ * Typography
+ *
+ * Headings: Libre Baskerville
+ * Body text: Open Sans
+ */
+
+
+/* Google webfonts import */
+
+@import url("http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,latin-ext");
+
+
+/*doc
+---
+title: Fonts
+name: fonts
+category: Base
+---
+We are using two main fonts: Open sans for main text, Libre Baskerville for headings.
+
+<code>$font-family-sans-serif: "Open Sans", Helvetica, Arial, sans-serif;</code>
+<code>$font-family-serif: "Libre Baskerville", Times, serif;</code>
+
+```html_example
+
+<h1>Heading</h1>
+<p>
+   Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+   Cumque at sint ratione sapiente, veniam, fugiat magnam nesciunt adipisci
+   recusandae ab ullam voluptates amet accusamus molestiae vel id. Placeat,
+   odio architecto!
+</p>
+```
+
+##Headings
+```html_example
+<h1>My title level 1</h1>
+<h2>My title level 2</h2>
+<h3>My title level 3</h3>
+<h4>My title level 4</h4>
+<h5>My title level 5</h5>
+<h6>My title level 6</h6>
+```
+
+##Lead
+```html_example
+<p class="lead">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ita separantur, ut disiuncta sint, quo nihil potest esse perversius.
+</p>
+```
+
+##Contextual color
+```html_example
+<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p class="text-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p class="text-success">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p class="text-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p class="text-warning">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p class="text-danger">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+```
+
+##Contextual backgrounds
+```html_example
+<p class="bg-primary">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p class="bg-success">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p class="bg-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p class="bg-warning">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p class="bg-danger">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+```
+
+##Block quote
+```html_example
+<blockquote>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ita separantur, ut disiuncta sint, quo nihil potest esse perversius. An est aliquid, quod te sua sponte delectet? Verum tamen cum de rebus grandioribus dicas, ipsae res verba rapiunt; Re mihi non aeque satisfacit, et quidem locis pluribus.
+  </p>
+  <small>
+    Eddard Stark, lord of Winterfel
+  </small>
+</blockquote>
+```
+*/
+
+
+
+/* Redefining bootstrap defaults */
+$font-family-sans-serif: "Open Sans", Helvetica, Arial, sans-serif;
+$font-family-serif: "Libre Baskerville", Times, serif;
+
+$headings-font-family: $font-family-serif;
+$headings-font-weight: 600;

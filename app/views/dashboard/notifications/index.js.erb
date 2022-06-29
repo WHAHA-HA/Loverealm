@@ -1,0 +1,14 @@
+<% @grouped_activities.each do |key, values| %>
+  if($('.notification-group[data-date="<%= key %>"]').length) {
+    console.log(321)
+    $('.notification-group[data-date="<%= key %>"]').append($('<%= j render_activity values %>'));
+  } else {
+    $('.notification-group:last').after($('<%= j render partial: "notification_group", locals: { date: key, activities: values } %>'))
+  }
+<% end %>
+
+<% if @activities.next_page %>
+  $('.load-more').attr('href', '<%= url_for(page: @activities.next_page) %>');
+<% else %>
+  $('.load-more').remove();
+<% end %>

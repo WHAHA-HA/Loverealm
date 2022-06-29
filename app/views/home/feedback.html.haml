@@ -1,0 +1,15 @@
+.feedback.holder
+	%h1= title 'Feedback'
+	%p Our company is run and maintained by real people, that's why we love your feedback. We make a conscious effort to respond to every enquiry we receive, don't hesitate contacting us.
+	.form-box
+		= simple_form_for Feedback.new do |f|
+			.content-box
+				%p Choose a topic
+				= f.select :subject, ['Bug/Error', 'Feature Request', 'Suggestion', 'Miscellaneous'], include_blank: false
+
+				.text-area-box
+					%p Comment
+					= f.input :description, as: :text, label: false
+
+				.submit-box
+					= f.button :submit, "Send Feedback"

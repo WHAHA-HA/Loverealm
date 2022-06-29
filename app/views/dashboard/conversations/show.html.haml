@@ -1,0 +1,24 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Home', dashboard_user_path(current_user)
+  %li Messages
+
+%h2 Inbox
+
+.row
+  .col-md-2
+    = render 'sidebar'
+
+  .col-md-10
+    .conversation
+      %h3 Conversation
+      - @messages.each do |message|
+        = render partial: 'conversation_message', locals: { message: message, delete_option: message.sender == current_user }
+
+      .reply-form.row.validating-form
+        = simple_form_for [:dashboard, @conversation, @message], remote: true do |f|
+          = f.input :receiver_id, as: :hidden, input_html:{value: "#{params[:receiver_id]}"}
+          .col-md-10
+            = f.input :body, label: false, placeholder: 'Message', required: true
+          .col-md-2
+            = f.submit "Send Message", class: 'btn btn-primary', data: { disable_with: "Sending..."}

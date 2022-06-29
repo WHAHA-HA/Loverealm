@@ -1,0 +1,46 @@
+.new-message-btn {
+  background-color: $primary-color;
+  color: #fff;
+  box-shadow: 2px 2px 0px 0 rgba(0, 0, 0, 1);
+  display: block;
+  border-radius: 0;
+  font-weight: bold;
+
+  &:hover, &:focus {
+    color: #fff;
+  }
+}
+
+.message-button-group {
+  margin-top: 30px;
+
+  .message-btn {
+    display: block;
+    border-radius: 0;
+    background-color: #eee;
+    color: #555;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    font-weight: bold;
+
+    &.active {
+      background-color: #670a07;
+      color: #fff;
+    }
+  }
+
+  .message-btn:last-child {
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+.message {
+  .user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    padding: 3px;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+  }
+}

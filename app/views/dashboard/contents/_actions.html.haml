@@ -1,0 +1,48 @@
+.content-actions.clearfix
+  - score_path = content.is_liked_by?(current_user) ? dislike_dashboard_content_path(content) : like_dashboard_content_path(content)
+  - active_class = content.is_liked_by?(current_user) ? 'active' : ''
+  = link_to score_path, class: "content-action like-action #{active_class}", remote: true, method: :put do
+    %span.icon.glyphicon.glyphicon-heart{"aria-hidden" => "true"}
+    %span.count
+      = content.cached_votes_score
+
+  %span.content-action.comment-action
+    %span.icon.glyphicon.glyphicon-comment{"aria-hidden" => "true"}
+    %span.count
+      = content.comments_count
+
+  = link_to new_report_path(target_type: :content, target_id: content.id), remote: true, class: 'content-action' do
+    %span.icon.glyphicon.glyphicon-flag{"aria-hidden" => "true"}
+    Report
+
+
+  .share-button-container.content-action.dropdown
+    %span{'data-toggle' => 'dropdown'}
+      = image_tag('share-128.png', class: 'share-button-icon icon')
+      = tv '.share.caption'
+
+      %span.shares-count #{content.shares_count}
+
+
+    %ul.dropdown-menu
+      - if content.user_id != current_user.try(:id)
+        %li.internal-sharing
+          = render partial: 'dashboard/shares/internal_link', locals: { content: content }
+
+      %li
+        = link_to tv('.share.on_other'), '#', class: 'external-sharing'
+
+  %ul.share-buttons.hidden
+    %li
+      %a{:href => "https://www.facebook.com/sharer/sharer.php?u=#{dashboard_content_url(content)}", :target => "_blank"}
+        = image_tag("icons/Facebook.png")
+    %li
+      %a{:href => "https://twitter.com/home?status=#{dashboard_content_url(content)}", :target => "_blank"}
+        = image_tag("icons/Twitter.png")
+    %li
+      %a{:href => "https://plus.google.com/share?url=#{dashboard_content_url(content)}", :onclick => "javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"}
+        = image_tag("icons/google_plus.png")
+    %li
+      %a{:href => "whatsapp://send?text=#{dashboard_content_url(content)}", :target => "_blank"}
+        = image_tag("icons/whatsapp.png")
+

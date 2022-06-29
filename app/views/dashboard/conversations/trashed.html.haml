@@ -1,0 +1,19 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Home', dashboard_user_path(current_user)
+  %li Messages
+
+.row
+  .col-md-2
+    = render 'dashboard/conversations/sidebar'
+
+  .col-md-10
+    .conversation
+      %h3 Trashed
+      - if @messages.present?
+        - @messages.each do |message|
+          = render partial: 'dashboard/conversations/conversation_message', locals: { message: message, retrieve_option: true, show_removed: true }
+      - else
+        .empty-trash
+          %h3
+            Trash is empty

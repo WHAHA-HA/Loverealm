@@ -1,0 +1,10 @@
+<% if remotipart_submitted? %>
+  var $content = $('<%= j "#{render_content_item @content}" %>');
+<% else %>
+  var $content = $('<%= j render_content_item @content %>');
+<% end %>
+
+window.injectYoutubeVideoPreview($content.find('.status-content-text'));
+
+$content.hide().prependTo('#contents').fadeIn(200);
+$(".option-panel textarea").val("");

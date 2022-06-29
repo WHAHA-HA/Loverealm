@@ -1,0 +1,40 @@
+.welcome-step-wrapper
+  .step-heading
+    .heading Tell us a bit more about yourself
+    .subheading Set up your account
+
+  = render 'dashboard/users/upload_profile_avatar'
+  .validating-form
+    = simple_form_for(current_user, url: dashboard_update_user_info_path(current_user), html: { method: :put }) do |f|
+      = f.input_field :is_newbie, as: :hidden, input_html: { value: false }
+
+      - if current_user.errors.any?
+        .registration-errors
+          %ul
+            - current_user.errors.full_messages.each do |msg|
+              %li= msg
+
+      .form-group
+        = f.input_field :first_name, placeholder: 'First Name', required: true, class: 'form-control'
+
+      .form-group
+        = f.input_field :last_name, placeholder: 'Last Name', required: true, class: 'form-control'
+
+      .form-group
+        = f.input_field :country, as: :country, prompt: 'Select your Country', class: 'country-select chosen-select form-control'
+
+      .form-group
+        .row
+          .col-xs-12.col-sm-6
+            = f.input_field :sex, as: :select, collection: @sexs, prompt: 'Select your Gender', class: 'form-control chosen-select'
+
+          .col-xs-12.col-sm-6
+            = datepicker_helper f, :birthdate, current_user.try(:birthdate), "Select your birthdate:"
+            .icon-wrapp
+              %i.datepicker-icon
+
+      .form-group
+        = f.input_field :biography, as: :text, label: false, placeholder: 'Give us a short info about you', required: true, class: 'form-control'
+
+      .form-group.text-right
+        = f.submit 'Save', class: 'btn welcome-btn'

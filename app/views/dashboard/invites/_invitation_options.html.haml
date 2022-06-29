@@ -1,0 +1,99 @@
+%script{:src => "https://apis.google.com/js/client.js"}
+%script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"}
+%script{:src => "http://connect.facebook.net/en_US/all.js"}
+:javascript
+  function facebookInit(){
+    FB.init({
+      appId      : #{ENV['FACEBOOK_KEY']},
+      status     : true,
+      xfbml      : true,
+      version    : 'v2.4' // or v2.0, v2.1, v2.2, v2.3
+    });
+  }
+
+  $(function(){
+
+    facebookInit()
+
+    $("a#invite_fb_friends").click(function(){
+      FB.ui({
+        method: 'send',
+        link: 'www.loverealm.com',
+        to: []
+      });
+    });
+  });
+
+
+  function auth() {
+    var config = {
+      'client_id': '#{ENV['GOOGLE_KEY']}',
+      'scope': ['https://www.google.com/m8/feeds', 'https://www.googleapis.com/auth/gmail.send', 'https://www.googleapis.com/auth/gmail.compose', 'https://www.googleapis.com/auth/userinfo.profile']
+    };
+    gapi.auth.authorize(config, function() {
+      fetch(gapi.auth.getToken());
+      loadGmailApi()
+    });
+  }
+
+  function fetch(token) {
+    $.ajax({
+      url: "https://www.google.com/m8/feeds/contacts/default/full?access_token=" + token.access_token + "&alt=json&max-results=5000&v=3.0",
+      dataType: "jsonp",
+      success:function(data) {
+        for (i = 0; i < data.feed.entry.length; i++) {
+          if (typeof data.feed.entry[i].gd$email != 'undefined') {
+            var fullName = "";
+            if (data.feed.entry[i].gd$name) {
+              fullName = data.feed.entry[i].gd$name.gd$fullName.$t;
+            }
+            var template = userInvitationTemplate(fullName, data.feed.entry[i].gd$email[0].address)
+            $("#invitations").append(template);
+          };
+        }
+        $("#invitations").parents('form').find('.btn, .toggle-invitation-label').removeClass('hidden')
+      }
+    });
+  }
+
+  function userInvitationTemplate(name, email) {
+    var str = '';
+    str += '<div class="user-invitation-card highlighted">' +
+            '<div class="checkbox">' +
+              '<label class="ellipsis"><input type="checkbox" name="emails[]" value="' + email + '" checked>' + name + '<br />' + email + '</label>' +
+            '</div>' +
+           '</div>';
+    return str;
+  }
+
+  $(document).on('change', '#invitations input[name="emails[]"]', function(e){
+    e.preventDefault();
+    $container = $(this).parents('.user-invitation-card');
+    if($(this).is(":checked")) {
+      $container.addClass('highlighted');
+    } else {
+      $container.removeClass('highlighted');
+    }
+  });
+
+  $(document).on('change', '#toggle_invitations', function(e){
+    e.preventDefault();
+    $form = $(this).parents('form');
+    $form.find('input[name="emails[]"]').prop('checked', $(this).prop("checked"));
+    if($(this).is(":checked")) {
+      $form.find('.user-invitation-card').addClass('highlighted');
+    } else {
+      $form.find('.user-invitation-card').removeClass('highlighted');
+    }
+  })
+
+  function loadGmailApi() {
+    gapi.client.load('gmail', 'v1');
+  }
+
+.invitation-options
+  %a.btn.btn-invite.gmail{href: '#', onclick: 'auth();'}
+    = tv '.invite_by_gmail_html'
+
+  %a#invite_fb_friends.btn.btn-invite.facebook
+    = tv '.invite_by_facebook_html'

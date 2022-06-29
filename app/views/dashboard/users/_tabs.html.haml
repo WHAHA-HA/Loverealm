@@ -1,0 +1,9 @@
+%ul#action-list.clearfix.nav.nav-tabs
+  %li
+    =link_to "News Feed", dashboard_user_path(current_user)
+  %li 
+    =link_to "Inbox", dashboard_inbox_path(current_user)
+  %li
+    =link_to "Notifications", dashboard_notifications_path(current_user)
+  %li
+    =link_to "Preferences", dashboard_preferences_path(current_user)

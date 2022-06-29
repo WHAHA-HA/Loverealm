@@ -1,0 +1,30 @@
+:ruby
+  set_meta_tags og: {
+    title: @content.title,
+    type: 'article',
+    image: @content.image.url(:full),
+    description: shortik(@content.description, 140)
+  }
+
+.content.content-full.story{'data-content-id' => @content.id}
+  .text-center
+    %h1
+      = title sanitized_preview @content.title
+    %time
+      = posted_time @content
+
+  .content-body
+    .content-image
+      = image_tag(@content.image.url(:full))
+    .content-text
+      = description sanitized_preview(prepare_story_text(@content.description))
+
+    = render partial: 'author_info', locals: { user: @content.user }
+
+  .content-footer.clearfix
+    = render partial: 'dashboard/contents/actions', locals: { content: @content }
+    = render partial: 'dashboard/contents/tags', locals: { content: @content }
+
+  = render partial: 'dashboard/contents/card_comments', locals: { content: @content }
+
+= render partial: 'recommended_stories', locals: { recommended_stories: @recommended_stories }

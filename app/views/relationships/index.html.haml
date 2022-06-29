@@ -1,0 +1,24 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Home', dashboard_user_path(current_user)
+  %li #{@relation_type.capitalize}
+
+%h2 #{@relation_type.capitalize} (#{relationship_counter(@displayed_user, @relation_type)})
+
+#relations.row
+  = render partial: 'relationships/list', locals: { relations: @relations }
+
+- if @relations.next_page
+  .text-center
+    = link_to url_for(page: @relations.next_page), class: 'btn btn-primary load-more' do
+      %span.glyphicon.glyphicon-refresh.spinning
+      Vew more
+
+- if page_owner?@displayed_user && !@suggested_users.blank?
+  .sidebar-fixed-info
+    - @suggested_users.each do |user|
+      #notificationAvatar
+        = show_avatar user, "thumb"
+        %a.user-black
+          = content_owner user
+        = render 'follow_form', other_user: user

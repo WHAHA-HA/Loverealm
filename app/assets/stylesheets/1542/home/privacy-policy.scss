@@ -1,0 +1,38 @@
+.privacy-policy {
+	font-family: "Libre Baskerville", Times, serif;
+
+	h1 {
+		text-align: center;
+		margin: 65px 0 70px 0;
+		font-size: 35px;
+    color: #fff;
+	}
+
+	h2 {
+		margin: 0;
+		border-bottom: 2px solid #ba2a26;
+		font-size: 25px;
+		display: inline-block;
+		padding-bottom: 15px;
+		margin-bottom: 30px;
+	}
+
+	p {
+		margin-bottom: 30px;
+	}
+
+	.privacy-policy-holder {
+		background-color: #e6e6e6;
+		padding: 20px 25px;
+	}
+
+	p.note {
+		color: $primary-color;
+		margin-bottom: 65px;
+	}
+
+	.dates p {
+		margin-bottom: 10px;
+	}
+
+}

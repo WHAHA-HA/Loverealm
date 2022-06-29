@@ -1,0 +1,256 @@
+.content-feed {
+  max-width: 762px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.content {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+  margin: 40px 0;
+
+  &.content-full {
+    max-width: 800px;
+    margin: 20px auto;
+
+    .content-text {
+      padding: 20px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    h1, .content-text {
+      font-family: "Libre Baskerville", Times, serif;
+    }
+
+    .author-info {
+      width: 250px;
+      margin: 20px auto;
+      text-align: center;
+
+      .author-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+
+      .sub-heading {
+        color: #bbb;
+        margin: 10px auto 5px;
+        text-transform: uppercase;
+      }
+
+      .author-name {
+        font-size: 24px;
+        font-family: "Libre Baskerville", Times, serif;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .content-header {
+    line-height: 32px;
+    border-bottom: 1px solid #eee;
+
+    .media img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .content-author {
+      font-weight: bold;
+      color: #000;
+
+      &:hover {
+        text-decoration: underline;
+        color: inherit;
+      }
+    }
+
+    time {
+      color: #999;
+      font-size: 12px;
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    .controls {
+      float: right;
+      display: none;
+
+      .content-control-item {
+        color: #777;
+        margin: 0 5px;
+        font-size: 14px;
+        font-family: arial, serif;
+
+        span {
+          margin-right: 3px;
+        }
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          color: #555;
+        }
+      }
+    }
+  }
+
+  .content-share-info {
+    margin-bottom: 8px;
+    color: #999;
+
+    a {
+      color: #999;
+
+      &:hover {
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+
+    span {
+      color: green;
+      margin-right: 4px;
+    }
+  }
+
+  .content-body {
+    padding: 15px 0px 10px;
+    font-size: 14px;
+    position: relative;
+
+    .content-image img {
+      width: 100%;
+    }
+  }
+
+  .content-comments {
+    margin-top: 15px;
+
+    .load-more-comments {
+      display: block;
+      background-color: #e9e9e9;
+      margin: 0 -10px;
+      padding: 5px 10px;
+      text-align: center;
+
+      &:hover {
+        text-decoration: none;
+        background-color: #efefef;
+      }
+    }
+  }
+
+  &:hover {
+    .controls {
+      display: block;
+    }
+  }
+}
+
+.content.story {
+  .story-text-wrapper {
+    width: 70%;
+    margin: -60px auto 0;
+    border-top: 10px solid $primary-color;
+    background: #fff;
+    padding: 10px 20px;
+    position: relative;
+
+    .excert, .read-more {
+      font-family: "Libre Baskerville",Times,serif;
+      font-size: 16px;
+    }
+
+    .excert {
+      margin: 10px 0;
+    }
+  }
+}
+
+.content.status {
+  .status-content-text {
+    font-size: 28px;
+    font-family: "Libre Baskerville", Times, serif;
+    text-align: center;
+
+    .status-link {
+      color: #333;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.content.image {
+  .description {
+    margin-top: 10px;
+  }
+}
+
+
+.content-image-preview {
+  width: 100%;
+}
+
+.content-with-sidebar {
+  .content-feed {
+    float: right;
+    margin: auto;
+  }
+
+  .sidebar {
+    float: right;
+    margin-left: 18px;
+    min-height: 1px;
+
+    .sidebar-item {
+      background-color: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+      border-radius: 3px;
+      padding: 10px;
+      margin-top: 10px;
+
+      .sidebar-item-heading {
+        color: #999;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: bold;
+        border-bottom: 1px solid #f4f4f4;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .sidebar, .sidebar-content {
+    width: 220px;
+  }
+}
+
+@media only screen and (max-width : 1200px) {
+  .content-with-sidebar {
+    .content-feed {
+      max-width: 702px;
+    }
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+  .content-with-sidebar {
+    .content-feed {
+      max-width: 762px;
+    }
+    .sidebar {
+      display: none;
+    }
+  }
+}

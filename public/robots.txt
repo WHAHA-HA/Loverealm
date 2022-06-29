@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /dashboard/search
+Sitemap: http://loverealm.s3.amazonaws.com/sitemaps/sitemap.xml.gz
+Crawl-delay: 10

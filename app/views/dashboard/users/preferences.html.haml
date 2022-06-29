@@ -1,0 +1,8 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Home', dashboard_user_path(current_user)
+  %li My account
+
+%h2 Your Profile
+
+= render "update_profile"

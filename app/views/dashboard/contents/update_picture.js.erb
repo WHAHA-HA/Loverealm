@@ -1,0 +1,2 @@
+$('form#edit_content_<%= @content.id%>').find('.content-image-preview')
+  .attr('src', '<%= @content.image.url(:medium) %>');

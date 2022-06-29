@@ -1,0 +1,12 @@
+%p
+  Hi there #{@appointment.mentor.email},
+
+%p You just invited on counseling chat. Please check latest messages here:
+%p= link_to "Appointment with #{@appointment.mentee.email}", dashboard_conversation_url(@appointment.conversation)
+%p
+  LoveRealm is a Christian social network that connects Christians worldwide.
+
+%p
+  Kind Regards,
+%br
+  The team at LoveRealm.

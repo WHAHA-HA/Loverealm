@@ -1,0 +1,2522 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.1.0",
+        "title": "LoveRealm API"
+    },
+    "paths": {
+        "/api/v1/mobile/users": {
+            "post": {
+                "summary": "Register user (first step)",
+                "description": "Registers user (first step)",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "email",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "password",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "password_confirmation",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/me": {
+            "get": {
+                "summary": "User details",
+                "description": "Get currently logged in user's information",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/{id}": {
+            "put": {
+                "summary": "Update user (3rd step)",
+                "description": "Updates user details like birthdate, sex, etc.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "first_name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "last_name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "country",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "sex",
+                        "required": true,
+                        "type": "integer",
+                        "description": "0 means male, 1 means female",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    },
+                    {
+                        "in": "formData",
+                        "name": "birthdate",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "biography",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "is_newbie",
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "avatar[base64_data]",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "avatar[original_filename]",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "phone_number",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    },
+                    "422": {
+                       "description": "Validation errors",
+                       "schema": {
+                            "$ref": "#/definitions/ValidationErrorsResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/{id}/profile": {
+            "get": {
+                "summary": "User profile",
+                "description": "User details with array of contents",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of contents per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/UserWithContents"
+                        }
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/{id}/unread_message_count": {
+            "get": {
+                "summary": "User unread message count",
+                "description": "Count data",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/UnreadMessageCount"
+                        }
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/{id}/update_fcm_token": {
+            "post": {
+                "summary": "User fcm token update",
+                "description": "Update user's fcm token",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "device_token",
+                        "in": "query",
+                        "description": "Device token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fcm_token",
+                        "in": "query",
+                        "description": "FCM token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "successful operation"
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/{id}/remove_fcm_token": {
+            "post": {
+                "summary": "User fcm token remove",
+                "description": "Remove user's fcm token",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "device_token",
+                        "in": "query",
+                        "description": "Device token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                       "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/{id}/cover": {
+            "put": {
+                "summary": "Update profile cover",
+                "description": "Updates user profile cover.",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "cover[base64_data]",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "cover[original_filename]",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/{id}/appointments": {
+            "post": {
+                "summary": "Create appointment with mentor",
+                "description": "Create appointment with mentor",
+                "parameters": [
+                    {
+                        "name": "mentor_id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Appointment"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/{id}/hash_tags": {
+            "get": {
+                "summary": "List of user hash tags",
+                "description": "List of user hash tags",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/HashTags"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Add user hash tags",
+                "description": "Add user hash tags (that represent user interests)",
+                "parameters": [
+                    {
+                        "name": "hash_tag_ids",
+                        "in": "formData",
+                        "description": "Array of hashtag ids",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "hash_tag_names",
+                        "in": "formData",
+                        "description": "Array of hashtag names",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/following": {
+            "get": {
+                "summary": "Following users",
+                "description": "List of following users",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of follwing users per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Following"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/followers": {
+            "get": {
+                "summary": "Follower users",
+                "description": "List of follower users",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of follwer users per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Followers"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/search_following": {
+            "get": {
+                "summary": "Search following users",
+                "description": "Search following users",
+                "parameters": [
+                    {
+                        "name": "search_term",
+                        "in": "query",
+                        "description": "Search term",
+                        "required": false,
+                        "type": "string",
+                        "example": "Marko"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of follwing users per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserSimple"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/users/password": {
+            "post": {
+                "summary": "Send reset password instructions",
+                "description": "Generate reset password token and send instructions",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "description": "User email address",
+                        "required": true,
+                        "type": "string",
+                        "example": "user@loverealm.com"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update user password",
+                "description": "Update user password",
+                "parameters": [
+                    {
+                        "name": "reset_password_token",
+                        "description": "Reset password token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "description": "Password",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "description": "Password confirmation",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserSimple"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/hash_tags": {
+            "get": {
+                "summary": "Get all hashtags",
+                "description": "Retrieves all hashtags for displaying on forms for user to choose",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/HashTags"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/hash_tags/autocomplete_hash_tags": {
+            "get": {
+                "summary": "Search hashtags",
+                "description": "Searches hashtags by name",
+                "parameters": [
+                    {
+                        "name": "term",
+                        "in": "formData",
+                        "description": "start of or whole name of hashtag",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/HashTags"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/relationships/follow": {
+            "post": {
+                "summary": "Follow user",
+                "description": "Follow user",
+                "parameters": [
+                    {
+                        "name": "followed_id",
+                        "in": "formData",
+                        "description": "Id of the user that should be followed",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/relationships/unfollow": {
+            "post": {
+                "summary": "Unfollow user",
+                "description": "Unfollow user",
+                "parameters": [
+                    {
+                        "name": "followed_id",
+                        "in": "formData",
+                        "description": "Id of the user that should be unfollowed",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/statuses": {
+            "post": {
+                "summary": "Add status",
+                "description": "Add status",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Status"
+                        }
+                    },
+                    "422": {
+                       "description": "Validation errors",
+                       "schema": {
+                            "$ref": "#/definitions/ValidationErrorsResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/statuses/{id}": {
+            "get": {
+                "summary": "Get status",
+                "description": "Get status details",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Status id (actually it's content id from dashboard endpoint)",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Status"
+                        }
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/statuses/{id}": {
+            "put": {
+                "summary": "Update status",
+                "description": "Update status",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Status"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/stories": {
+            "post": {
+                "summary": "Add story",
+                "description": "Add story",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "title",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "image[base64_data]",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "image[original_filename]",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "hash_tag_ids",
+                        "description": "Array of hashtag ids",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Story"
+                        }
+                    },
+                    "422": {
+                       "description": "Validation errors",
+                       "schema": {
+                            "$ref": "#/definitions/ValidationErrorsResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/stories/{id}": {
+            "get": {
+                "summary": "Get story",
+                "description": "Get story details",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Story id (actually it's content id from dashboard endpoint)",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Story"
+                        }
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update story",
+                "description": "Update story",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "title",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "image",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Story"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/pictures": {
+            "post": {
+                "summary": "Add picture",
+                "description": "Add picture",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "image[base64_data]",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "image[original_filename]",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Picture"
+                        }
+                    },
+                    "422": {
+                       "description": "Validation errors",
+                       "schema": {
+                            "$ref": "#/definitions/ValidationErrorsResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/pictures/{id}": {
+            "get": {
+                "summary": "Get pictures",
+                "description": "Get pictures details",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Picture id (actually it's content id from dashboard endpoint)",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Picture"
+                        }
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/pictures/{id}": {
+            "put": {
+                "summary": "Update picture",
+                "description": "Update picture",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "image",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Picture"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/contents": {
+            "get": {
+                "summary": "Content list",
+                "description": "Content list",
+                "parameters": [
+                    {
+                        "name": "tag_id",
+                        "in": "path",
+                        "description": "Fitler content by hash tag id",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of contents per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Content"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/contents/{id}": {
+            "delete": {
+                "summary": "Delete content",
+                "description": "Delete content",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Content id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/contents/{id}/like": {
+            "post": {
+                "summary": "Like content",
+                "description": "Like content",
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/contents/{id}/dislike": {
+            "post": {
+                "summary": "Dislike content",
+                "description": "Dislike content",
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/dashboard": {
+            "get": {
+                "summary": "Get dashboard of currently logged in user",
+                "description": "Get all contents for currently logged in user with all flags that are needed on first screen",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of contents per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Dashboard"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/suggested_users": {
+            "get": {
+                "summary": "Get suggested users",
+                "description": "Retrieves suggested users which currently logged in user can follow",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserSimple"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/reports": {
+            "post": {
+                "summary": "Report (user, content or comment)",
+                "description": "Report (user, content or comment) so someone can review it",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "description",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "target_type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "target_id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Report"
+                        }
+                    },
+                    "422": {
+                       "description": "Validation errors",
+                       "schema": {
+                            "$ref": "#/definitions/ValidationErrorsResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/comments": {
+            "post": {
+                "summary": "Create new comment",
+                "description": "Create new comment for content (status, picture, story)",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "body",
+                        "required": true,
+                        "type": "string",
+                        "example": "This is awesome!"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "content_id",
+                        "required": true,
+                        "type": "integer",
+                        "example": 24
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/comments/{id}": {
+            "put": {
+                "summary": "Update comment",
+                "description": "Update comment",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "body",
+                        "required": true,
+                        "type": "string",
+                        "example": "This is better!"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    }
+                }
+            }
+        },
+        "api/v1/mobile/mentor": {
+            "get": {
+                "summary": "Get mentor",
+                "description": "Get mentor of currently logged in user",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "full_name": {
+                                    "type": "string",
+                                    "example": "Truc Trac"
+                                },
+                                "avatar_url": {
+                                    "type": "string",
+                                    "example": "https://example.com/user.jpg"
+                                },
+                                "mentor_conversation_id": {
+                                    "type": "integer",
+                                    "example": 3
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "When current user does not have mentor 204 is returned"
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/conversations": {
+            "get": {
+                "summary": "Get all conversations",
+                "description": "Get all conversations for currently logged in user",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of conversations per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ConversationSimple"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/conversations/{id}": {
+            "get": {
+                "summary": "Get conversation",
+                "description": "Get conversation with user details and list of messages",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of messages per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Conversation"
+                        }
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/conversations/{id}/unread_message_count": {
+            "get": {
+                "summary": "Conversation unread message count",
+                "description": "Count data",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/UnreadMessageCount"
+                        }
+                    },
+                    "404": {
+                        "description": "Invalid id supplied",
+                        "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/conversations/{id}/read_messages": {
+            "post": {
+                "summary": "Read conversation messages",
+                "description": "read conversation message",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "Invalid id supplied",
+                        "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/messages": {
+            "post": {
+                "summary": "Create new message",
+                "description": "Create new message",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "receiver_id",
+                        "required": true,
+                        "type": "integer",
+                        "example": 779
+                    },
+                    {
+                        "in": "formData",
+                        "name": "body",
+                        "required": true,
+                        "type": "string",
+                        "example": "Hey what's up?"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/messages/{id}": {
+            "delete": {
+                "summary": "Delete message",
+                "description": "Delete message",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Message id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/messages/deleted": {
+            "get": {
+                "summary": "Deleted messages",
+                "description": "Get all deleted messages for currently logged in user",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of conversations per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Messages"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/notifications": {
+            "get": {
+                "summary": "Get all notifications",
+                "description": "Get all notifications for currently logged in user",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of conversations per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Activity"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/invitations": {
+            "post": {
+                "summary": "Send invitation sms",
+                "description": "Send invitation sms",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "phone_numbers[]",
+                        "required": false,
+                        "type": "string",
+                        "example": "12345678900"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "emails[]",
+                        "required": false,
+                        "type": "string",
+                        "example": "test@test.com"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/search": {
+            "get": {
+                "summary": "Search users & contents",
+                "description": "Search users & contents",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Search query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "users": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/UserSimple"
+                                    }
+                                },
+                                "contents": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Content"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/search/users": {
+            "get": {
+                "summary": "Search users",
+                "description": "Search users",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Search query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/UserSimple"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/search/contents": {
+            "get": {
+                "summary": "Search contents",
+                "description": "Search contents",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Search query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "required": false,
+                        "default": 1,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "default": 5,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Content"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/mobile/shares": {
+            "post": {
+                "summary": "Share content",
+                "description": "Share content",
+                "parameters": [
+                    {
+                        "name": "content_id",
+                        "description": "Content ID",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Stop sharing content",
+                "description": "Stop sharing content",
+                "parameters": [
+                    {
+                        "name": "content_id",
+                        "description": "Content ID",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                       "description": "Invalid id supplied",
+                       "schema": {
+                            "$ref": "#/definitions/NotFoundErrorResponse"
+                       }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Comment": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "body": {
+                    "type": "string",
+                    "example": "This is awesome!"
+                },
+                "user": {
+                    "type": "object",
+                    "schema": {
+                        "$ref": "#/definitions/UserSimple"
+                    }
+                },
+                "created_at": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1457989534
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1457989534
+                }
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "email": {
+                    "type": "string",
+                    "example": "user@example.com"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "nick": {
+                    "type": "string"
+                },
+                "birthdate": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 524044800000
+                },
+                "sex": {
+                    "type": "integer",
+                    "description": "0 means male, 1 means female",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                },
+                "biography": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string",
+                    "enum": [
+                        "AL",
+                        "AF",
+                        "AG",
+                        "RS",
+                        "US"
+                    ]
+                },
+                "location": {
+                    "type": "string"
+                },
+                "avatar_url": {
+                    "type": "string",
+                    "example": "https://example.com/user.jpg"
+                },
+                "cover_photo_url": {
+                    "type": "string",
+                    "example": "https://example.com/cool-cover-photo.jpg"
+                },
+                "created_at": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1457989534
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1457989534
+                }
+            }
+        },
+        "UserWithContents": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "email": {
+                    "type": "string",
+                    "example": "user@example.com"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "nick": {
+                    "type": "string"
+                },
+                "birthdate": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 524044800000
+                },
+                "sex": {
+                    "type": "integer",
+                    "description": "0 means male, 1 means female",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                },
+                "biography": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string",
+                    "enum": [
+                        "AL",
+                        "AF",
+                        "AG",
+                        "RS",
+                        "US"
+                    ]
+                },
+                "location": {
+                    "type": "string"
+                },
+                "avatar_url": {
+                    "type": "string",
+                    "example": "https://example.com/user.jpg"
+                },
+                "cover_photo_url": {
+                    "type": "string",
+                    "example": "https://example.com/cool-cover-photo.jpg"
+                },
+                "created_at": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1457989534
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1457989534
+                },
+                "following": {
+                    "type": "boolean",
+                    "description": "Is current user follow?",
+                    "example": "true"
+                },
+                "number_of_followers": {
+                    "type": "integer",
+                    "example": 55
+                },
+                "number_of_followings": {
+                    "type": "integer",
+                    "example": 467
+                },
+                "number_of_posts": {
+                    "type": "integer",
+                    "example": 53
+                },
+                "contents": {
+                    "description": "array of contents",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Content"
+                    }
+                }
+            }
+        },
+        "UserSimple": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "full_name": {
+                    "type": "string",
+                    "example": "Truc Trac"
+                },
+                "avatar_url": {
+                    "type": "string",
+                    "example": "https://example.com/user.jpg"
+                }
+            }
+        },
+        "HashTags": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "example": "love"
+                }
+            }
+        },
+        "Status": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "description": {
+                    "type": "string",
+                    "example": "I feel awesome"
+                },
+                "number_of_likes": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "created_at": {
+                    "type": "integer",
+                    "example": 1463087467
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "example": 1463087467
+                },
+                "user": {
+                    "type": "object",
+                    "schema": {
+                        "$ref": "#/definitions/UserSimple"
+                    }
+                },
+                "comments": {
+                    "description": "array of comments",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Comment"
+                    }
+                },
+                "hash_tags": {
+                    "description": "array of hash tags",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HashTags"
+                    }
+                }
+            }
+        },
+        "Picture": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "description": {
+                    "type": "string",
+                    "example": "I feel awesome"
+                },
+                "image_url": {
+                    "type": "string",
+                    "example": "https://example.com/picture1.png"
+                },
+                "number_of_likes": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "created_at": {
+                    "type": "integer",
+                    "example": 1463087467
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "example": 1463087467
+                },
+                "user": {
+                    "type": "object",
+                    "schema": {
+                        "$ref": "#/definitions/UserSimple"
+                    }
+                },
+                "comments": {
+                    "description": "array of comments",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Comment"
+                    }
+                },
+                "hash_tags": {
+                    "description": "array of hash tags",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HashTags"
+                    }
+                }
+            }
+        },
+        "Comment": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "body": {
+                    "type": "string",
+                    "example": "Some body"
+                },
+                "created_at": {
+                    "type": "integer",
+                    "example": 1463087467
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "example": 1463087467
+                },
+                "user": {
+                    "type": "object",
+                    "schema": {
+                        "$ref": "#definitions/UserSimple"
+                    }
+                }
+            }
+        },
+        "Story": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Some title"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "I feel awesome"
+                },
+                "image_url": {
+                    "type": "string",
+                    "example": "https://example.com/image.jpg"
+                },
+                "number_of_likes": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "created_at": {
+                    "type": "integer",
+                    "example": 1463087467
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "example": 1463087467
+                },
+                "hash_tags": {
+                    "description": "array of hash tags",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HashTags"
+                    }
+                },
+                "user": {
+                    "type": "object",
+                    "schema": {
+                        "$ref": "#/definitions/UserSimple"
+                    }
+                },
+                "comments": {
+                    "description": "array of comments",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Comment"
+                    }
+                }
+            }
+        },
+        "Following": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "users": {
+                    "description": "array of following users",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/UserSimple"
+                    }
+                }
+            }
+        },
+        "Followers": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "users": {
+                    "description": "array of followings",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Follower"
+                    }
+                }
+            }
+        },
+        "Follower": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "full_name": {
+                    "type": "string",
+                    "example": "Truc Trac"
+                },
+                "avatar_url": {
+                    "type": "string",
+                    "example": "https://example.com/user.jpg"
+                },
+                "following": {
+                    "type": "boolean",
+                    "example": false
+                }
+            }
+        },
+        "Dashboard": {
+            "type": "object",
+            "properties": {
+                "number_of_unread_messages": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "number_of_unread_notifications": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "number_of_followers": {
+                    "type": "integer",
+                    "example": 55
+                },
+                "number_of_followings": {
+                    "type": "integer",
+                    "example": 467
+                },
+                "number_of_suggested_users": {
+                    "type": "integer",
+                    "example": 7
+                },
+                "number_of_posts": {
+                    "type": "integer",
+                    "example": 53
+                },
+                "contents": {
+                    "description": "array of contents",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Content"
+                    }
+                }
+            }
+        },
+        "Content": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 4
+                },
+                "description": {
+                    "type": "string",
+                    "example": "This is awesome content"
+                },
+                "number_of_likes": {
+                    "type": "integer",
+                    "example": 5
+                },
+                "number_of_comments": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "type": {
+                    "type": "string",
+                    "example": "story"
+                },
+                "image_url": {
+                    "description": "Exists only if content is picture or story",
+                    "type": "string",
+                    "example": "https://example.com/image.jpg"
+                },
+                "title": {
+                    "description": "Exists only if content is story",
+                    "type": "string",
+                    "example": "Life is awesome"
+                },
+                "created_at": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1457989534
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "description": "Unix timestamp",
+                    "example": 1457989534
+                },
+                "user": {
+                    "type": "object",
+                    "schema": {
+                        "$ref": "#/definitions/UserSimple"
+                    }
+                },
+                "shared_by": {
+                    "type": "object",
+                    "schema": {
+                        "$ref": "#/definitions/UserSimple"
+                    }
+                },
+                "liked": {
+                    "type": "boolean",
+                    "description": "Check if current user liked content item",
+                    "example": "true"
+                }
+            }
+        },
+        "Report": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "description": {
+                    "type": "string",
+                    "example": "This contains bad words"
+                }
+            }
+        },
+        "ConversationSimple": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 6
+                },
+                "user": {
+                    "type": "object",
+                    "schema": {
+                        "$ref": "#/definitions/UserSimple"
+                    }
+                },
+                "number_of_messages": {
+                    "type": "integer",
+                    "example": 53
+                },
+                "last_message": {
+                    "description": "Last message",
+                    "type": "object",
+                    "items": {
+                        "$ref": "#/definitions/MessageSimple"
+                    }
+                }
+            }
+        },
+        "Conversation": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 6
+                },
+                "user": {
+                    "type": "object",
+                    "schema": {
+                        "$ref": "#/definitions/UserSimple"
+                    }
+                },
+                "number_of_messages": {
+                    "type": "integer",
+                    "example": 53
+                },
+                "messages": {
+                    "description": "List of messages for conversation",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Message"
+                    }
+                }
+            }
+        },
+        "Messages": {
+            "type": "object",
+            "properties": {
+                "number_of_messages": {
+                    "type": "integer",
+                    "example": 53
+                },
+                "messages": {
+                    "description": "List of deleted messages",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Message"
+                    }
+                }
+            }
+        },
+        "MessageSimple": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "body": {
+                    "type": "string",
+                    "example": "Hey, what's up?"
+                },
+                "is_read": {
+                    "type": "boolean",
+                    "example": "true"
+                },
+                "created_at": {
+                    "type": "integer",
+                    "description": "When is message sent",
+                    "example": 1457989534
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "description": "When is message updated",
+                    "example": 1457989534
+                }
+            }
+        },
+        "UnreadMessageCount": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer",
+                    "example": 2
+                }
+            }
+        },
+        "Message": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "body": {
+                    "type": "string",
+                    "example": "Hey, what's up?"
+                },
+                "receiver_id": {
+                    "type": "integer",
+                    "example": 8
+                },
+                "sender_id": {
+                    "type": "integer",
+                    "example": 22
+                },
+                "is_read": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "removed_at": {
+                    "type": "integer",
+                    "description": "Date when the message is removed (unix timestamp)",
+                    "example": 1457989538
+                },
+                "created_at": {
+                    "type": "integer",
+                    "description": "When is message sent",
+                    "example": 1457989534
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "description": "When is message updated",
+                    "example": 1457989534
+                },
+                "story_id": {
+                    "type": "integer",
+                    "description": "Reference to story which is related to this message",
+                    "example": 124
+                }
+            }
+        },
+        "Appointment": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "mentee_id": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "mentor_id": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "finished": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "mentor_conversation_id": {
+                    "type": "integer",
+                    "example": 3
+                }
+            }
+        },
+        "Activity": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 2
+                },
+                "trackable_id": {
+                    "type": "integer",
+                    "example": 8
+                },
+                "trackable_type": {
+                    "type": "string",
+                    "example": "Content"
+                },
+                "trackable_object": {
+                    "type": "object",
+                    "description": "Additional information for specific trackable type"
+                },
+                "key": {
+                    "type": "string",
+                    "example": "content.create"
+                },
+                "owner": {
+                    "$ref": "#/definitions/UserSimple"
+                },
+                "recipient": {
+                    "$ref": "#/definitions/UserSimple"
+                },
+                "created_at": {
+                    "type": "integer",
+                    "description": "When is activity sent",
+                    "example": 1457989534
+                },
+                "updated_at": {
+                    "type": "integer",
+                    "description": "When is activity updated",
+                    "example": 1457989534
+                },
+                "checked": {
+                    "type": "boolean",
+                    "description": "Is activity checked",
+                    "example": true
+                }
+            }
+        },
+        "NotFoundErrorResponse": {
+            "type": "object",
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "example": "Can't find resource with given id"
+                    }
+                }
+            }
+        },
+        "ValidationErrorsResponse": {
+            "type": "object",
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "example": "example_field can't be blank"
+                    }
+                }
+            }
+        }
+    }
+}
+

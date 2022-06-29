@@ -1,0 +1,4 @@
+= simple_form_for content, url: dashboard_contents_path, remote: true, input_html: { id: 'new_post_status' } do |f|
+  = f.input_field :content_type, as: :hidden, value: 'status'
+  = f.input :description, label: false, placeholder: 'Add description here...', required: true, maxlength: 150
+  = f.submit 'Update Status', class: 'btn btn-primary'

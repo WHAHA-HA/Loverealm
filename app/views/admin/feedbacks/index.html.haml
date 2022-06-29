@@ -1,0 +1,16 @@
+%div.actions.follow-container
+  %p.big
+  %p.pull-left
+  %h2 Feedbacks
+  - @feedbacks.each do |feedback|
+    .following-container.clearfix
+      = link_to show_avatar(feedback.user, "thumb"),dashboard_user_path(feedback.user)
+      %i
+        = feedback.subject
+      .text-holder
+        %h6 #{feedback.user.full_name}
+        %br
+        %span
+          = link_to 'See feedback', [:admin, feedback]
+  = paginate @feedbacks
+

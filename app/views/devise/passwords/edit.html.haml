@@ -1,0 +1,12 @@
+%div.sign-up-wrapp
+  .form-signup.col-sm-6.login-btn
+    %h2 Change your password
+    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      = f.error_notification
+      = f.input :reset_password_token, as: :hidden
+      = f.full_error :reset_password_token
+      .form-inputs
+        = f.input_field :password, required: true, autofocus: true, :placeholder => "New password"
+        = f.input_field :password_confirmation, required: true, :placeholder => "Confirm your new password"
+      .form-actions
+        = f.button :submit, "Change"

@@ -1,0 +1,17 @@
+- content = local[:content]
+%div.comments
+  - content.comments.each do |comment|
+    %div.comment-wrapper
+      %div#avatar
+        = show_avatar comment.user, "thumb"
+        %h4
+          = comment_owner comment.user
+      %span
+        = posted_time comment
+      %div.content
+        %br
+          - if can? :edit, comment
+            = best_in_place [:dashboard, comment], :body, as: :textarea
+          - else
+            = pure_text comment.body
+      %hr

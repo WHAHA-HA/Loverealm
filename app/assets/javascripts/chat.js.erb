@@ -1,0 +1,249 @@
+/**
+ * Chat logic
+ *
+ *
+ */
+
+var ready = function () {
+    var fayeURL = $('meta[name=fayeURL]');
+    if (window.fayeClient == undefined) {
+        window.fayeClient = new Faye.Client(fayeURL.attr("content"));
+    }
+
+    chatBox = {
+        currentConversationId: 0,
+        conversationList: [],
+        isOpened: false,
+        pageNumber: 1,
+        hasMoreContacts: true,
+        isContactLoading: false,
+        isMessageLoading: false,
+
+        checkConversationId: function (conversation) {
+            return conversation.id == chatBox.currentConversationId;
+        },
+
+        /**
+         * closes the chatbox by essentially hiding it from the page
+         *
+         * @param conversation_id
+         */
+
+        close: function () {
+            $('.chat-box').animate({ height: '0', border: 'none', top: '100%' }, "fast");
+            chatBox.isOpened = false;
+        },
+        /**
+         * opens the chatbox by essentially showing it from the page
+         *
+         * @param conversation_id
+         */
+
+        open: function () {
+            $('.chat-box').animate({ height: '100%', border: '1px solid #b6b4b6', top: '0' }, "fast");
+            chatBox.isOpened = true;
+//            chatBox.loadMessages(chatBox.currentConversationId);
+        },
+
+        /**
+         * Plays a notification sound when a new chat message arrives
+         */
+
+        notify: function () {
+            var audioplayer = $('#chatAudio')[0];
+            audioplayer.play();
+        },
+
+        /**
+         * Handles 'smart layouts' of the chatboxes.
+         */
+
+        initialize: function () {
+            chatBox.hookEvents();
+            chatBox.loadContacts();
+        },
+
+        hookEvents: function () {
+            $(document.body).on('click', '.chat-box .contact-list .scroll-holder .contact-item' ,function(){
+                var conversationId = $(this).data('id');
+                chatBox.loadMessages(conversationId);
+            });
+
+            $(document.body).on('click', '.chat-box .close-icon' ,function(){
+                chatBox.close();
+            });
+
+            $(document.body).on('click', '.chat-button' ,function(){
+                if (!chatBox.isContactLoading && !chatBox.isMessageLoading) {
+                    chatBox.open();
+                }
+            });
+
+            $('.contact-list .scroll-holder').scroll(function(e){
+                var element = e.target;
+                if (element.scrollTop + element.clientHeight > element.scrollHeight - 500) {
+                    chatBox.loadContacts();
+                }
+            });
+
+            $('#message_body').keydown(function(e) {
+                if (e.ctrlKey == false && e.keyCode == 13) {
+                    e.preventDefault();
+                    $('form#chat_form').submit();
+                }
+            });
+            var meta = $('meta[name=cryptedHash]');
+            fayeClient.subscribe('/notifications/' + meta.attr("content") , function(data) {
+                console.log(data);
+                if (data.type == "message") {
+                    var conversation_id = data.source.conversation_id;
+                    if (chatBox.currentConversationId == conversation_id && chatBox.isOpened) {
+                        var msgListContainer = $('.chat-box .msg-list .scroll-holder')
+                        var avatar_url = data.user.avatar_url;
+                        if (avatar_url == "missing.jpg") {
+                            avatar_url = '<%= asset_path('missing.jpg')%>';
+                        }
+                        msgListContainer.append('<div class="msg-holder incoming">' +
+                                '<div class="avatar-holder">' +
+                                '<img class="avatar" src="' + avatar_url + '"/>' +
+                                '</div>' +
+                                '<div class="msg-content">' + data.source.body + '</div>' +
+                                '</div>'
+                        );
+
+                        msgListContainer.animate({ scrollTop: msgListContainer[0].scrollHeight }, "fast");
+                        $.ajax({
+                            type: "GET",
+                            url: "/dashboard/conversations/"+conversation_id+"/read_messages",
+                            dataType: 'json',
+                            complete: function(response){
+                            }
+                        });
+                    } else {
+                        var contactContainer = $('.chat-box .contact-list .scroll-holder ul').find('li[data-id=' + data.source.conversation_id + ']')
+                        var chatButtonContainer = $('.chat-button');
+                        chatBox.increaseCounter(contactContainer);
+                        chatBox.increaseCounter(chatButtonContainer);
+                    }
+
+                }
+            });
+        },
+
+        loadContacts: function() {
+            if (chatBox.hasMoreContacts && !chatBox.isContactLoading) {
+                var userId = $('.chat-button').data("id");
+                chatBox.isContactLoading = true;
+                $('.chat-box .contact-list .scroll-holder ul').append('<li class="contact-item loading-icon"><i class="loading"></i></li>');
+                $.get("/dashboard/users/" + userId + "/conversations?page=" + chatBox.pageNumber, function (data) {
+                    var contactListContainer = $('.chat-box .contact-list .scroll-holder ul')
+                    $('.chat-box .contact-list .scroll-holder ul li.loading-icon').remove();
+                    for (var index in data) {
+                        var conversation = data[index];
+                        contactListContainer.append(
+                                '<li data-id="' + conversation['id'] + '" class="contact-item">' +
+                                '<img class="avatar" src="' + conversation['url'] + '"/>' +
+                                (conversation.unread_count > 0 ? '<span class="counter">' + conversation.unread_count + '</span>' : '') +
+                                '</li>'
+                        );
+                    }
+
+                    if (chatBox.currentConversationId == 0 && data.length > 0) {
+                        chatBox.loadMessages(data[0].id);
+                    }
+
+                    if (data.length < 20) {
+                        chatBox.hasMoreContacts = false;
+                    }
+
+                    chatBox.conversationList = chatBox.conversationList.concat(data)
+                    chatBox.pageNumber ++;
+                    chatBox.isContactLoading = false;
+                }, "json");
+            }
+        },
+
+        loadMessages: function (conversationId) {
+            if (!chatBox.isMessageLoading) {
+                chatBox.isMessageLoading = true;
+//                $('.chat-box .msg-list .loading').css("display", "block");
+                chatBox.currentConversationId = conversationId;
+                $.get("/dashboard/conversations/" + conversationId + ".json", function (response) {
+                    var data = JSON.parse(response);
+                    var msgListContainer = $('.chat-box .msg-list .scroll-holder')
+                    msgListContainer.html("");
+
+                    for (var index in data) {
+                        var message = data[index];
+                        var avatar_url = message['avatar_url'];
+                        if (avatar_url == "missing.jpg") {
+                            avatar_url = '<%= asset_path('missing.jpg')%>';
+                        }
+                        msgListContainer.append('<div class="msg-holder ' + message['direction'] + '">' +
+                                '<div class="avatar-holder">' +
+                                '<img class="avatar" src="' + avatar_url + '"/>' +
+                                '<div class="time">' + message['sent_at'] + '</div>' +
+                                '</div>' +
+                                '<div class="msg-content">' + message['body'] + '</div>' +
+                                '</div>'
+                        );
+                    }
+
+                    var currentConversation = $.grep(chatBox.conversationList, function(e){ return e.id == chatBox.currentConversationId; })[0];
+
+                    $('.chat-box .header .user-info .avatar').attr("src", currentConversation['url']);
+                    $('.chat-box .header .user-info .info .name').html(currentConversation['name']);
+
+                    msgListContainer.animate({ scrollTop: msgListContainer[0].scrollHeight }, "fast");
+
+
+                    var contactContainer = $('.chat-box .contact-list .scroll-holder ul').find('li[data-id=' + conversationId + ']');
+                    var messageContainer = $('.messages');
+                    var chatButtonContainer = $('.chat-button');
+
+                    chatBox.decreaseCounter(messageContainer, contactContainer);
+                    chatBox.decreaseCounter(chatButtonContainer, contactContainer);
+                    chatBox.decreaseCounter(contactContainer, contactContainer);
+                    chatBox.isMessageLoading = false;
+
+                }, "html");
+
+                $('#chat_form').attr("action", "/dashboard/conversations/" + conversationId + "/messages")
+            }
+
+        },
+
+        increaseCounter: function(element) {
+            var counterContainer = element.find('.counter');
+            if (counterContainer.length > 0) {
+                counterContainer.html(parseInt(counterContainer.html()) + 1);
+            } else {
+                $('<span class="counter"></span>').html("1").appendTo(element);
+            }
+        },
+
+        decreaseCounter: function(element, source) {
+            var counterContainer = element.find('.counter');
+            var sourceCounterContainer = source.find('.counter');
+            var sourceUnreadCount = 0;
+            if (sourceCounterContainer.length > 0) {
+                sourceUnreadCount = parseInt(sourceCounterContainer.html());
+            }
+
+            if (counterContainer.length > 0) {
+                var unreadCount = parseInt(counterContainer.html()) - sourceUnreadCount;
+                if (unreadCount <= 0) {
+                    counterContainer.remove();
+                } else {
+                    counterContainer.html(unreadCount);
+                }
+            }
+        }
+    }
+
+    chatBox.initialize();
+}
+
+$(document).ready(ready);
+$(document).on("page:load", ready);
+

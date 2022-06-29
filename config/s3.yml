@@ -1,0 +1,23 @@
+# Amazon AWS Config
+default: &default
+  access_key_id: <%= ENV['AWS_KEY'] %>
+  secret_access_key: <%= ENV['AWS_SECRET'] %>
+  bucket: <%= ENV['S3_BUCKET'] %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+staging:
+  <<: *default
+
+test:
+  access_key_id: 'test'
+  secret_access_key: 'test'
+  bucket: 'test'
+
+production:
+  <<: *default
+

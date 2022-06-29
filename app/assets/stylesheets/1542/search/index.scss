@@ -1,0 +1,24 @@
+.search-header {
+  text-align: center;
+  margin: 50px 0;
+
+  h1 {
+      font-size: 30px;
+  }
+}
+
+.empty-search-result {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+
+  p {
+    font-size: 15px;
+  }
+
+  blockquote {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+}

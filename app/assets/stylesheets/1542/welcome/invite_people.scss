@@ -1,0 +1,17 @@
+.welcome-step-wrapper {
+  .invitation-options {
+    text-align: center;
+  }
+
+  #invitations {
+    margin: 0 -15px 0 -5px;
+    max-height: 300px;
+    overflow-y: scroll;
+
+    .user-invitation-card {
+      padding: 5px 10px;
+      width: 180px;
+      margin: 5px;
+    }
+  }
+}

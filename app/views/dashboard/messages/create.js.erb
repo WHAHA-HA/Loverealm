@@ -1,0 +1,17 @@
+$(".alert").remove();
+<% if @message.errors.count == 0 %>
+    var conversationId = <%= @message.conversation.id %>
+
+    $('#message_body').val('');
+    if ($('.modal-body-primary').length > 0) {
+        $('.modal-body-primary .alert').remove();
+        $('#message_subject').val('');
+        $('.modal-body-primary').prepend('<div class="alert alert-notice">Message sent successfully.</div>');
+    } else if (window.location.pathname.indexOf("/conversations/" + conversationId) > -1) {
+        $("<%= j render partial: '/dashboard/conversations/conversation_message', locals: { message: @message, delete_option: @message.sender == current_user } %>").insertBefore('.reply-form');
+    }
+
+    if (chatBox.currentConversationId == conversationId) {
+        chatBox.loadMessages(chatBox.currentConversationId);
+    }
+<% end %>

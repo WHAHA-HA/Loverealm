@@ -1,0 +1,11 @@
+%p
+  Hello #{@receiver.email},
+
+%p
+  #{@sender.full_name} sent you a new message on LoveRealm.
+  Please read the message #{link_to "here", dashboard_conversation_url(@conversation)}.
+
+%p
+  Kind Regards,
+  %br
+  The Team at LoveRealm

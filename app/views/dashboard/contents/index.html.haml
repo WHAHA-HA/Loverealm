@@ -1,0 +1,11 @@
+= render partial: 'components/trending_tags', locals: { hash_tags: @trending_tags }
+
+.content-feed
+  #contents
+    = render partial: 'dashboard/contents/list', locals: {contents: @contents}
+
+  - if @contents.next_page
+    .text-center
+      = link_to url_for(page: @contents.next_page), class: 'btn btn-primary load-more' do
+        %span.glyphicon.glyphicon-refresh.spinning
+        Vew more

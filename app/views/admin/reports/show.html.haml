@@ -1,0 +1,2 @@
+= render partial: "#{@report.target_type.downcase}_report", locals: { report: @report }
+= link_to 'Mark as reviewed', reviewed_admin_report_path(@report), method: :post, class: 'btn btn-default'

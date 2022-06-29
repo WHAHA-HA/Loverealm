@@ -1,0 +1,28 @@
+= render 'dashboard_header'
+= render partial: 'components/trending_tags', locals: { hash_tags: @trending_tags }
+
+.content-with-sidebar
+  .sidebar
+    .sidebar-content
+      .sidebar-item
+        .sidebar-item-heading Suggested users
+        .suggested-user-list
+          - if @suggested_users.present?
+            = render partial: 'dashboard/users/suggested_user', collection: User.suggested_users(current_user).limit(5), as: :user
+
+            .text-center
+              = link_to 'See all', suggested_dashboard_users_path, class: 'btn btn-primary'
+          - else
+            .p No users found
+
+  .content-feed
+    = render 'profile_options' if page_owner?(@displayed_user)
+
+    #contents
+      = render partial: 'dashboard/contents/list', locals: {contents: @contents}
+
+    - if @contents.next_page
+      .text-center
+        = link_to url_for(page: @contents.next_page), class: 'btn btn-primary load-more' do
+          %span.glyphicon.glyphicon-refresh.spinning
+          Vew more

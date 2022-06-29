@@ -1,0 +1,27 @@
+%ol.breadcrumb
+  %li
+    = link_to t('breadcrumbs.home'), dashboard_user_path(current_user)
+  %li #{tv '.heading'}
+
+.invitation-header
+  %h1 #{tv '.heading'}
+
+  %blockquote
+    %p #{tv '.verse.text'}
+    %footer #{tv '.verse.source'}
+
+.invitation-buttons.text-center
+  = render 'invitation_options'
+
+= form_tag dashboard_invites_path do
+  .text-center.form-group
+    = submit_tag 'Invite', class: 'btn btn-primary btn-invite-lg hidden'
+    = label_tag :toggle_invitations, class: 'toggle-invitation-label hidden' do
+      = check_box_tag :toggle_invitations, :show_all, checked: true
+      Select all
+
+  .form-group
+    = render 'invitation_container'
+
+  .text-center.form-group
+    = submit_tag 'Invite', class: 'btn btn-primary btn-invite-lg'

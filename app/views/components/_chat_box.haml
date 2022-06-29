@@ -1,0 +1,31 @@
+.chat-box
+  %i.close-icon
+  .header
+    .search-box
+      %i.search-icon
+    .user-info
+      = image_tag current_user.avatar.url, class: "avatar pull-left"
+      .info
+        .name
+        .status
+          .status-circle
+          .status-info
+            Offline | 6:16 AM Italy
+      %i.calendar-icon.pull-right
+      %i.dollar-icon.pull-right
+  .body
+    .contact-list.pull-left
+      .scroll-holder
+        %ul
+      .my-avatar.pull-left
+        = image_tag current_user.avatar.url, class: "avatar"
+    .msg-list.pull-left
+      .loading
+      .scroll-holder
+      .form-container
+        .inner-section
+          = form_tag "", method: 'post', remote: true, id: "chat_form" do |f|
+            = hidden_field_tag "message[receiver_id]"
+            = text_area_tag "message[body]", nil, placeholder: 'Message', required: true, class: 'pull-left'
+            %i.emoji-icon.pull-left
+            = image_submit_tag "icons/send-icon.png", class: "send-icon pull-left"

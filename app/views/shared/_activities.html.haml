@@ -1,0 +1,6 @@
+- @grouped_activities.each do |key, values|
+  .notification-group-date
+    = key.strftime '%d %B %Y'
+
+  .notification-group.row
+    = render_activity values

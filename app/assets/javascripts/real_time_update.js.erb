@@ -1,0 +1,82 @@
+jQuery(document).ready(function($) {
+    var numberOfUpdates = 0;
+    var fayeURL = $('meta[name=fayeURL]');
+    if (window.fayeClient == undefined) {
+        window.fayeClient = new Faye.Client(fayeURL.attr("content"));
+    }
+
+    var meta = $('meta[name=cryptedHash]');
+    console.log(fayeClient);
+
+    var commonMeta = $('meta[name=commonHash]');
+    fayeClient.subscribe('/notifications/' + commonMeta.attr("content") , function(data) {
+        console.log("common channel", data);
+        switch(data.type) {
+            case "comment":
+                var contentStatusContainer = $('.content[data-content-id=' + data.source.content_id + '] .content-comments .comments');
+                var commentContainer = contentStatusContainer.find('.comment[data-comment-id=' + data.source.id + ']');
+
+                if (contentStatusContainer.length > 0 && commentContainer.length == 0){
+                    var avatar_url = data.user.avatar_url;
+                    if (avatar_url == "missing.jpg") {
+                        avatar_url = '<%= asset_path('missing.jpg')%>';
+                    }
+                    var comment =  '<a class="comment-author-image" href="/dashboard/users/' + data.user.id + '/profile"><img src="' + avatar_url + '" alt="Missing"></a>' +
+                                '<div class="comment-content">' +
+                                    '<div class="comment-header">' +
+                                        '<a class="comment-author-name" href="/dashboard/users/' + data.user.id + '/profile">Nikolay Andreev</a>' +
+                                        '<span class="time">' +
+                                            'less than a minute ago' +
+                                        '</span>' +
+                                        '<a class="report pull-right" data-remote="true" href="/reports/new?target_id='+ data.source.id +'&amp;target_type=comment"><span aria-hidden="true" class="icon glyphicon glyphicon-flag"></span>' +
+                                            'Report' +
+                                        '</a>' +
+                                    '</div>' +
+                                    '<div class="comment-body">' +
+                                        data.source.body +
+                                    '</div>' +
+                                '</div>';
+                    $('<div class="comment clearfix" data-comment-id="' + data.source.id + '"></div>').html(comment).appendTo(contentStatusContainer);
+
+                    var commentActionContainer = $('.content[data-content-id=' + data.source.content_id + '] .comment-action .count');
+                    if (commentActionContainer.length > 0) {
+                        var count = commentActionContainer.html();
+                        commentActionContainer.html(parseInt(count) + 1);
+                    }
+
+                }
+                break;
+            case "like":
+                var contentStatusContainer = $('.content[data-content-id=' + data.source.id + ']');
+                if (contentStatusContainer.length > 0) {
+                    contentStatusContainer.find('.like-action .count').html(data.source.cached_votes_score);
+                }
+                break;
+            case "share":
+                var contentStatusContainer = $('.content[data-content-id=' + data.source.id + ']');
+                if (contentStatusContainer.length > 0) {
+                    contentStatusContainer.find('.share-button-container .shares-count').html(data.source.shares_count + 1);
+                }
+                break;
+            case "follow":
+                var userFollowerContainer = $('.dashboard-header[data-user-id=' + data.source.followed_id + '] .user-stat-item.follower .counter');
+                if (userFollowerContainer.length > 0) {
+                    var count = userFollowerContainer.html();
+                    if (count.indexOf("K") < 0) {
+                        userFollowerContainer.html(parseInt(count) + 1);
+                    }
+                }
+
+                userFollowerContainer = $('.profile-header[data-user-id=' + data.source.followed_id + '] .user-stat-item.follower .counter');
+                if (userFollowerContainer.length > 0) {
+                    var count = userFollowerContainer.html();
+                    if (count.indexOf("K") < 0) {
+                        userFollowerContainer.html(parseInt(count) + 1);
+                    }
+                }
+
+                break;
+        }
+    });
+});
+

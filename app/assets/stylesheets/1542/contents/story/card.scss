@@ -1,0 +1,22 @@
+.story-card {
+  margin: 30px 0;
+  height: 120px;
+  overflow: hidden;
+
+  .media-heading {
+    margin-bottom: 10px;
+  }
+
+  .media-object {
+    width: 200px;
+  }
+
+  .content-actions {
+    margin-top: 10px;
+    float: none;
+
+    .content-action {
+      background-color: transparent;
+    }
+  }
+}

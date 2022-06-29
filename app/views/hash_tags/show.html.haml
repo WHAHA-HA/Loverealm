@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @hash_tag.name
+
+= link_to 'Edit', edit_hash_tag_path(@hash_tag)
+\|
+= link_to 'Back', hash_tags_path

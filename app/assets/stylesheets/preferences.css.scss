@@ -1,0 +1,134 @@
+.preferences-container {
+
+	.actions {
+		width: 100%;
+
+		h2 {
+			margin-top: 90px;
+		}
+	}
+
+	.button-save {
+		display: table;
+    	margin: 80px auto;
+    	border-color: $primary-color;
+	}
+
+	.form-inputs {
+		background: #eee;
+		padding: 30px 100px;
+
+		label {
+			font-weight: 400;
+		}
+
+		input, textarea {
+			border: 1px solid #333;
+			color: #b2b2b2;
+		}
+
+		.load-img-wrapper {
+			margin-bottom: 30px;
+			label {
+				text-decoration: none !important;
+				margin-top: 25px;
+			}
+		}
+
+		.load-img-wrapper img {
+			margin-left: 40px;
+			margin-right: 50px;
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+		}
+
+		input[type="text"], input[type="email"], textarea {
+			width: 100%;
+			background: transparent;
+			padding: 8px;
+			margin-bottom: 10px;
+			color: #333;
+		}
+
+		textarea {
+			height: 150px;
+		}
+
+		select {
+			background: transparent;
+			padding: 8px;
+
+			&.country-select {
+				width: 100%;
+			}
+		}
+
+		.datepicker-icon {
+			background-image: image-url("calendar-icon.png");
+			width: 30px;
+			height: 22px;
+			background-size: 100%;
+			background-repeat: no-repeat;
+			position: absolute;
+			right: 7px;
+		    top: 8px;
+		}
+
+		.chosen-container-single .chosen-single div {
+			left: auto !important;
+		    position: absolute !important;
+		    right: 3px !important;
+		    top: 15px !important;
+		}
+
+		.chosen-container-single .chosen-single div b {
+			border-left: 8px solid transparent;
+		    border-right: 8px solid transparent;
+		    border-top: 8px solid #333;
+		    height: 0 !important;
+		    width: 0 !important;
+		}
+
+		.chosen-container.chosen-container-single {
+			background: transparent;
+			border: 1px solid #333;
+			color: #333;
+			margin-bottom: 10px;
+
+			a, a.chosen-single {
+				background: transparent;
+				border: 0;
+				box-shadow: 0 0;
+				border-radius: 0;
+				height: 35px;
+				span {
+					color: #333;
+					font-size: 14px;
+				    margin-top: 5px;
+				    text-align: left;
+				}
+			}
+
+			.chosen-results {
+				li.active-result, li.highlighted {
+
+				}
+			}
+		}
+
+		#user_sex_chosen {
+			width: 202px !important;
+		}
+
+		.datepicker {
+			width: 202px !important;
+			float: right;
+			padding-bottom: 7px !important;
+		}
+	}
+}
+
+#ui-datepicker-div {
+	z-index: 10000 !important;
+}

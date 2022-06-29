@@ -1,0 +1,13 @@
+I"(function() {
+  $(function() {
+    return $('.splash-screen-close').click(function(e) {
+      e.preventDefault();
+      Cookies.set('splash-screen', 'hidden', {
+        expires: 3
+      });
+      return $('#splash-screen').remove();
+    });
+  });
+
+}).call(this);
+:ET

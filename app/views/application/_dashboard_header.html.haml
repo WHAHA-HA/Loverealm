@@ -1,0 +1,60 @@
+.dashboard-header{'data-user-id': @displayed_user.id}
+  .row
+    .col-md-4.user-info
+      .media
+        = link_to dashboard_user_path(@displayed_user), class: 'media-left' do
+          = image_tag @displayed_user.avatar.url(:square), class: 'media-object user-avatar'
+
+        .media-body.user-about
+          .media-heading
+            = link_to @displayed_user.full_name, dashboard_user_path(@displayed_user), class: 'user-name'
+
+          .user-bio
+            = @displayed_user.biography
+
+    .col-md-4.user-stats
+      .row
+        = link_to following_dashboard_user_path(@displayed_user), class: 'user-stat-item following' do
+          .counter
+            = @displayed_user.following.count
+          .caption
+            Following
+
+        = link_to dashboard_profile_path(@displayed_user), class: 'user-stat-item posts' do
+          .counter
+            = @displayed_user.contents.count
+          .caption
+            Posts
+
+        = link_to followers_dashboard_user_path(@displayed_user), class: 'user-stat-item follower' do
+          .counter
+            = followers_count @displayed_user
+          .caption
+            Followers
+
+    .col-md-4
+      .notification-toastr
+      - if page_owner? @displayed_user
+        - if @mentor.present?
+          .media.mentor-notification
+            = link_to dashboard_profile_path(@mentor), class: 'media-left' do
+              = image_tag @mentor.avatar.url(:square), class: 'media-object user-avatar'
+
+            .media-body.user-about
+              .media-heading
+                %strong
+                  = link_to @mentor.full_name, dashboard_profile_path(@mentor), class: 'user-name'
+
+              .user-message
+                %strong Hi I’m your assigned Counselor
+                = connect_with_counsellor @appointment, @mentor, current_user, @conversation
+      - else
+        .profile-menu
+          = link_to 'Send Message', new_dashboard_message_path(receiver_id: @displayed_user.id), remote: true, class: 'btn btn-default'
+
+          - if current_user.following?(@displayed_user)
+            = link_to 'Unfollow', current_user.active_relationships.find_by(followed_id: @displayed_user.id), method: :delete, class: 'btn btn-default'
+          - else
+            = link_to 'Follow', relationships_path(followed_id: @displayed_user.id), method: :post, class: 'btn btn-default'
+
+          = link_to 'Report', new_report_path(target_type: :user, target_id: @displayed_user.id), remote: true, class: 'btn btn-default'

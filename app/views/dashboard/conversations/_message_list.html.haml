@@ -1,0 +1,21 @@
+- conversations.each do |conversation|
+  - participant = User.find(conversation.get_participant(current_user))
+  .row.message.new{data: {id: conversation.id}}
+    .col-md-3
+      .message-media.media
+        = link_to dashboard_profile_path(participant), class: 'media-left' do
+          = show_avatar(participant, 'thumb', class: 'media-object user-avatar')
+        .media-body
+          .media-heading
+            = link_to participant.full_name, dashboard_profile_path(participant), class: 'user-name'
+
+          .message-sent-at
+            = pretty_time conversation.messages.last.created_at
+
+    .col-md-6
+      %div{class: "message-text #{conversation.messages.last.sender_id === current_user.id || conversation.messages.last.is_read ? '' : 'unread'}"}
+        = conversation.messages.last.subject || shortik(conversation.messages.last.body, 80)
+
+    .col-md-3
+      .message-options
+        = link_to 'Show Conversation', dashboard_conversation_path(conversation), class: 'btn message-option'

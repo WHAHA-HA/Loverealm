@@ -1,0 +1,5 @@
+en:
+  sms:
+    sender_name: LoveRealm
+    message:
+      invitation: "Hi, It's me %{username}. I'd love to connect with you. Let's get to know God better on LoveRealm. Download the free app here: http://loverealm.com/dl"

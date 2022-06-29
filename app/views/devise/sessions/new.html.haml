@@ -1,0 +1,14 @@
+%div.sign-up-wrapp
+  .form-signup.col-sm-6.login-btn
+    %h2 Log in
+    - if params[:confirmation_required]
+      = link_to 'Resend Confirmation Email', new_user_confirmation_path(resource_name), class: 'confirmation-link'
+
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-inputs
+        = f.input_field :email, required: false, autofocus: true, :placeholder => "email"
+        = f.input_field :password, required: false, :placeholder => "password"
+        / = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+      .form-actions
+        = f.button :submit, "Log in"
+    = render "devise/shared/links"

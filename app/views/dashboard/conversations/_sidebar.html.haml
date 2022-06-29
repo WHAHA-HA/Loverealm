@@ -1,0 +1,6 @@
+= link_to "New Message", new_dashboard_message_path, class: 'btn new-message-btn', remote: true
+
+.message-button-group
+  = link_to "Inbox (#{current_user.received_messages.unread_messages.count})", dashboard_user_conversations_path(current_user), class: 'btn message-btn active inbox-unread-count'
+
+  = link_to "Trash (#{current_user.sent_messages.trashed.count})", trashed_dashboard_messages_path, class: 'btn message-btn'

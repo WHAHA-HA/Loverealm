@@ -1,0 +1,32 @@
+.user-stats {
+  .user-stat-item {
+    text-align: right;
+    float: left;
+    padding: 8px 24px;
+    margin: 20px 0;
+
+    .caption {
+      color: #c8140f;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .counter {
+      color: #333;
+      font-style: arial, serif;
+      font-family: arial, serif;
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .user-stat-item + .user-stat-item{
+    border-left: 1px solid #cbd5ce;
+  }
+}

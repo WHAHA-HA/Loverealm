@@ -1,0 +1,52 @@
+.recommend-story-wrapper {
+	width: 800px;
+	display: table;
+    margin: 0 auto 80px;
+
+	.headline {
+		color: $primary-color;
+		font-size: 22px;
+		border-bottom: 3px solid #eee;
+		line-height: 42px;
+		margin-bottom: 0;
+	}
+
+	.content {
+		padding: 15px;
+
+		.left-side {
+			width: 65%;
+			padding-right: 15px;
+
+			h3 {
+				margin-top: 0;
+				font-size: 22px;
+			}
+
+			h4 {
+				font-size: 17px;
+    			font-weight: 100;
+    			line-height: 24px;
+			}
+
+			.post__footer {
+				margin: 15px 0 10px;
+
+				.post__like, .post__unlike {
+					margin-left: 0;
+				}
+			}
+		}
+
+		.right-side {
+			width: 35%;
+			height: 150px;
+			overflow: hidden;
+
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+	}
+}

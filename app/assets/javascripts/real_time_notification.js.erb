@@ -1,0 +1,119 @@
+jQuery(document).ready(function($) {
+    var numberOfUpdates = 0;
+    var fayeURL = $('meta[name=fayeURL]');
+    if (window.fayeClient == undefined) {
+        window.fayeClient = new Faye.Client(fayeURL.attr("content"));
+    }
+
+    var meta = $('meta[name=cryptedHash]');
+    console.log(fayeClient);
+    fayeClient.subscribe('/notifications/' + meta.attr("content") , function(data) {
+        console.log(data);
+        if (data.type == "message") {
+            var conversation_id = data.source.conversation_id;
+            if (chatBox.isOpened == false || chatBox.currentConversationId != conversation_id) {
+                if (window.location.pathname.indexOf("/conversations/" + conversation_id) > -1) {
+                    var avatar_url = data.user.avatar_url;
+                    if (avatar_url == "missing.jpg") {
+                        avatar_url = '<%= asset_path('missing.jpg')%>';
+                    }
+                    var message_html = '<a href="/dashboard/users/' + data.source.sender_id + '/profile">' +
+                        '   <img class="user-avatar" src="' + avatar_url + '">' +
+                        '</a>' +
+                        '<div class="message-content">' +
+                        '   <div class="message-header">' +
+                        '       <span class="date">' + data.source.created_at.substr(0, 10) + '</span>' +
+                        '   </div>' +
+                        '   <div class="message-text">' +
+                        data.source.body +
+                        '       <div class="text-right">' +
+                        '       </div>' +
+                        '   </div>' +
+                        '</div>';
+                    $.ajax({
+                        type: "GET",
+                        url: "/dashboard/conversations/"+conversation_id+"/read_messages",
+                        dataType: 'json',
+                        complete: function(response){
+                        }
+                    });
+                    $('<div class="clearfix message received-message"></div>').html(message_html).insertBefore('.reply-form');
+                } else {
+                    if (window.location.pathname.indexOf("/conversations") > -1) {
+                        var inbox_counter = $('.inbox-unread-count');
+                        var counter_value = inbox_counter.html().substr(inbox_counter.html().indexOf('(') + 1, inbox_counter.html().indexOf(')') - inbox_counter.html().indexOf('(') - 1);
+                        if (inbox_counter.length > 0) {
+
+                            inbox_counter.html("Inbox (" + (parseInt(counter_value) + 1) + ")");
+                        }
+                        var conversation_container = $(".message[data-id='" + data.source.conversation_id + "']")
+                        if (conversation_container.length > 0) {
+                            conversation_container.find(".message-sent-at").html(data.source.date_sent);
+                            conversation_container.find(".message-text").html(data.source.body);
+                            conversation_container.find(".message-text").addClass("unread");
+                        }
+                    }
+                    var message_counter = $('.messages .counter');
+                    if (message_counter.length > 0) {
+                        message_counter.html(parseInt(message_counter.html()) + 1);
+                    } else {
+                        console.log("adding counter");
+                        $('<span class="counter"></span>').html("1").appendTo('.messages');
+                    }
+                }
+            }
+
+
+        } else {
+            var message = data.user.first_name + " " + data.user.last_name;
+            switch(data.type) {
+                case "comment":
+                    message += " commented on your status.";
+                    break;
+                case "like":
+                    message += " loves your status.";
+                    break;
+                case "share":
+                    message += " shared your post.";
+                    break;
+                case "follow":
+                    message += " followed you.";
+                    break;
+            }
+            toastr.options.closeButton = true;
+            toastr.options.closeHtml = '<button><i class="icon-off"></i></button>';
+            toastr.options.closeMethod = 'fadeOut';
+            toastr.options.closeDuration = 300;
+            toastr.options.closeEasing = 'swing';
+            toastr.options.showMethod = 'slideDown';
+            toastr.options.timeOut = 0;
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-left",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "0",
+                "extendedTimeOut": "0",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            toastr.success(message, 'Notification');
+
+            var notification_counter = $('.bell .counter');
+            if (notification_counter.length > 0) {
+                notification_counter.html(parseInt(notification_counter.html()) + 1);
+            } else {
+                $('<span class="counter"></span>').html("1").appendTo('.bell');
+            }
+        }
+
+    });
+});
+

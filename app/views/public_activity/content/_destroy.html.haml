@@ -1,0 +1,5 @@
+%span.glyphicon.glyphicon-remove
+%small.text-muted= a.created_at.strftime('%H:%M:%S %-d %B %Y')
+%br/
+%strong= activity.owner ? activity.owner.full_name : 'Guest'
+deleted a story.

@@ -1,0 +1,20 @@
+= link_to 'Add new Daily Story', new_admin_story_path
+
+.inner-wrapper
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Publishing at
+        %th
+        %th
+
+    %tbody
+      - @stories.each do |story|
+        %tr{id: "story-#{story.id}"}
+          %td= link_to story.title, dashboard_content_path(story)
+          %td= story.is_published? ? 'Published' : story.publishing_at.to_date
+          %td= link_to 'Edit', edit_admin_story_path(story) unless story.is_published?
+          %td= link_to 'Delete', dashboard_content_path(story), method: :delete, data: { confirm: 'Are you sure?' }
+
+  = paginate @stories

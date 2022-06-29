@@ -1,0 +1,13 @@
+$content = $("<%= j render partial: 'dashboard/contents/list', locals: { contents: @contents } %>")
+$content.find('.status-content-text').each(function(index, status){
+  window.injectYoutubeVideoPreview($(status));
+});
+$('#contents').append($content);
+
+<% if @contents.next_page %>
+  $('.load-more').attr('href', '<%= url_for(page: @contents.next_page) %>');
+<% else %>
+  $('.load-more').remove();
+<% end %>
+
+$('.best_in_place').best_in_place();

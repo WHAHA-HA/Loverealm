@@ -1,0 +1,7 @@
+$('#relations').append("<%= j render partial: 'relationships/list', locals: { relations: @relations } %>");
+
+<% if @relations.next_page %>
+  $('.load-more').attr('href', '<%= url_for(page: @relations.next_page) %>');
+<% else %>
+  $('.load-more').remove();
+<% end %>

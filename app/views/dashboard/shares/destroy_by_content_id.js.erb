@@ -1,0 +1,7 @@
+$link = $("<%= j render partial: 'dashboard/shares/internal_link', locals: { content: @content } %>");
+$content = $('[data-content-id="<%= @content.id %>"]');
+
+$content.find('.shares-count').text(function(index, value){ return --value });
+
+$content.find('.internal-sharing').html($link);
+$content.find('.dropdown').removeClass('open');

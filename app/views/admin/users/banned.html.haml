@@ -1,0 +1,17 @@
+%div.actions.follow-container
+  %p.big
+  %p.pull-left
+  %h2 Users
+  - if @banned_users.count == 0
+    There is no banned users currently
+  - else
+    - @banned_users.each do |user|
+      .following-container.clearfix
+        = link_to show_avatar(user, "thumb"),[:dashboard, user]
+        .text-holder
+          %h6 #{user.full_name}
+          %br
+          %span
+            = link_to 'Activate user', unban_admin_user_path(user), method: :post
+    = paginate @banned_users
+

@@ -1,0 +1,19 @@
+.modal
+  .modal-dialog
+    .modal-content.validating-form
+      = simple_form_for([:dashboard, @message], remote: true )do |f|
+        .modal-header.modal-header-primary New Message
+
+        .modal-body.modal-body-primary
+          = f.error_notification
+          = f.input :receiver_id, as: :hidden, required: true, input_html: { value: @receiver.try(:id) }
+          .form-group.clearfix
+            = label_tag :receiver_name
+            .receiver-name-search-field
+              = text_field_tag :receiver_name, @receiver.try(:full_name), class: 'form-control'
+
+          = f.input :subject, required: true
+          = f.input :body, required: true
+
+        .modal-footer
+          = f.button :submit, class: 'btn-primary', data: { disable_with: "Sending..."}

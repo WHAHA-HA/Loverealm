@@ -1,0 +1,8 @@
+%form.navbar-form.navbar-right.search-form{:role => "search", :action => "/dashboard/search", :method => "get"}
+  %input{:type => 'hidden', :name => 'type', :value => 'people'}
+
+  .form-group
+    %input.form-control.search-text{:placeholder => "Seek and you shall find (Mathew 7:7)...", :type => "text", :autocomplete => "off", :name => 'filter'}
+
+  %button.btn{:type => "submit"}
+    %i.header-icon.search

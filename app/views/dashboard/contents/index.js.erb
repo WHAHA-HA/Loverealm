@@ -1,0 +1,9 @@
+$('#contents').append("<%= j render partial: 'dashboard/contents/list', locals: { contents: @contents } %>");
+
+<% if @contents.next_page %>
+  $('.load-more').attr('href', '<%= url_for(page: @contents.next_page) %>');
+<% else %>
+  $('.load-more').remove();
+<% end %>
+
+$('.best_in_place').best_in_place();

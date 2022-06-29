@@ -1,0 +1,24 @@
+.h2
+  Edit your daily story
+.content-feed
+  = simple_form_for(@story, url: update_picture_dashboard_content_path(@story), multipart: true, method: :put, remote: true) do |f|
+    .form-group
+      = image_tag(@story.image, class: 'content-image-preview')
+
+    .form-group Add a picture that describes your story
+
+    .form-group
+      .btn.btn-default.file-upload-button{'data-autosubmit' => 'true', 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i> Uploading"}
+        %span Upload
+        = f.input_field :image, label: false, required: true, class: :upload
+      %input#upload-file{disabled: "disabled", placeholder: "Choose File", required: true, class: 'file-upload-value'}
+
+  = simple_form_for(@story, url: admin_story_path(@story), method: :put) do |f|
+    = f.input :title, label: false, placeholder: "Name your story", required: true
+    #titleError.error-message
+      Can't be blank
+    = f.input :description, as: :bootsy, label: false, required: true, input_html: { rows: 20 }, placeholder: 'Tell your story'
+    = f.input :content_type, as: :hidden, input_html: { value: @story.content_type }
+    / %input#tags{:name => "tags"}/
+    = f.association :hash_tags, as: :text, input_html: { id: 'tags', name: 'tags', value: @hash_tags}
+    = f.button :button, "Publish", class: "btn btn-primary post-status", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Processing..."}

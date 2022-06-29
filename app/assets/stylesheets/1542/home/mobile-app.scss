@@ -1,0 +1,39 @@
+.home.mobile_app {
+  background: #F5F8FA;
+
+  .page {
+    margin-top: 40px;
+  }
+
+  .mobile-app-promo {
+    .mobile-app-promo-image {
+      max-width: 320px;
+      margin: 0 auto;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .mobile-app-promo-desc {
+      text-align: center;
+      margin-top: 60px;
+
+      h1 {
+        font-size: 36px;
+      }
+
+      p {
+        margin: 40px auto;
+        font-size: 16px;
+      }
+    }
+  }
+
+  footer {
+    color: #000;
+    a {
+      color: #000;
+    }
+  }
+}

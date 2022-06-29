@@ -1,0 +1,204 @@
+/**
+ * My content screen
+ */
+
+.content-screen__title:after {
+	content: "";
+	display: block;
+	margin-left: -3em;
+	margin-top: 1em;
+	border-bottom: 1px solid $LR-light-ash;
+}
+
+.content-category {
+	margin-bottom: 4em;
+}
+
+.content-category__item {
+	color: $LR-black;
+	text-transform: uppercase;
+}
+
+.content-category__item--active {
+	font-weight: bold;
+}
+
+
+.post {
+	position: relative;
+}
+
+.post + .post {
+	margin-top: 8em;
+}
+
+.post__avatar {
+
+}
+
+.post__menu {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.post__menu-dropdown {
+	width: 3em;
+	height: 3em;
+	display: block;
+	background-image: image-url("icons/basics-08-128.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.post__menu-dropdown--active ~ .post__menu-item {
+	display: block;
+
+}
+
+.post__menu-item {
+	display: none;
+	margin:0;
+	margin-left: -3em;
+}
+
+.post__thepost.post-quote {
+	text-align: center;
+	border: none;
+}
+
+.post-quote blockquote {
+	border: none;
+	margin: 0;
+}
+
+.post-quote__author {
+	display: block;
+	color: $LR-black;
+	font-size: $font-size-large;
+	font-family: $font-family-serif;
+	margin-top: 1em;
+
+}
+
+
+.post__footer {
+	margin-top: 3em;
+}
+
+
+.post__footer-something {
+	display: inline-block;
+}
+
+.post__like,
+.post__unlike,
+.post__comments,
+.post__share {
+	background: transparent;
+	border:none;
+	margin-left: 1em;
+	padding-left: 2.1em;
+	width: 3.8em;
+	float: left;
+}
+
+.post__like:after {
+	content: "";
+	position: relative;
+	display: block;
+	left:-1.5em;
+	top:-1.3em;
+	width: 1.2em;
+	height: 1.2em;
+	background-image: image-url("heart.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: -20px 0;
+}
+
+.post__unlike:after {
+	content: "";
+	position: relative;
+	display: block;
+	left:-1.5em;
+	top:-1.3em;
+	width: 1.2em;
+	height: 1.2em;
+	background-image: image-url("heart.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: -1px 0;
+}
+
+// .post__like:hover:after, .post__like:focus:after {
+// 	background-position-x: 0;
+// }
+
+// .post__unlike:hover:after, .post__like:focus:after {
+// 	background-position-x: 0;
+// }
+
+.post__comments:after {
+	content: "";
+	position: relative;
+	display: block;
+	left:-1.5em;
+	top:-1em;
+	width: 1.2em;
+	height: 1.2em;
+	background-image: image-url("comment.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.post__share:after {
+	content: "";
+	position: relative;
+	display: block;
+	left: -20px;
+	top:2px;
+	width: 1.2em;
+	height: 1.2em;
+	background-image: image-url("share-128.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+
+/**
+ * Drafts
+ */
+
+.drafts-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.drafts-list__item {
+	margin: 1em 0;
+	padding: 0;
+}
+
+.drafts-list__item a{
+	color: $LR-black;
+	font-size: $font-size-h3;
+}
+
+.back-to-main.btn.btn-default {
+	background: #fff none repeat scroll 0 0;
+    border: 1px solid #999 !important;
+    color: #666;
+    display: inline-block;
+    float: none;
+    font-size: 12px;
+    left: 110px;
+    position: absolute;
+    top: 11px;
+
+    &:hover {
+    	background: #666 none repeat scroll 0 0;
+    	color: #fff;
+    }
+}

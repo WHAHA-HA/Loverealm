@@ -1,0 +1,8 @@
+- unless @user_fb_token.blank?
+  - unless @fb_friends.blank?
+    - @fb_friends.each do |fb_friend|
+      .float-left.fb-avatar-section
+        = image_tag "http://graph.facebook.com/#{fb_friend.identifier}/picture", :class => 'float-left'
+        .float-left.fb-avatar-desc
+          .float-left.full-width.fb-avatar-name{:id => "fb_name_#{fb_friend.identifier}"}
+            = fb_friend.raw_attributes['name']

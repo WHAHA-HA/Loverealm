@@ -1,0 +1,40 @@
+.message-list {
+  margin: 0 15px 30px;
+
+  .message {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 2px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2) ;
+
+    &.new {
+      background-color: #eee;
+    }
+
+    .message-media {
+      .media-heading {
+        margin-bottom: 0;
+
+        .user-name {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .message-text {
+      &.unread {
+        font-weight: bold;
+      }
+    }
+
+    .message-options {
+      .message-option {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        font-size: 12px;
+        margin: 8px 5px;
+        border-radius: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+%h2
+  Mentor:
+  = @mentor.full_name
+
+
+= simple_form_for @mentor, url: admin_mentor_path(@mentor), method: :put do |f|
+  = f.label "Mentorship topic"
+  = f.association :hash_tags, as: :text, label: false, input_html: { id: 'tags', name: 'tags', value: @mentoring_hash_tag }, hint: "*Please choose only one unique topic."
+  = f.submit
+
+%br
+= link_to "Go back", admin_mentors_path

@@ -1,0 +1,19 @@
+.suggested-user {
+  margin: 10px 0 15px;
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  .media-heading {
+    .user-name {
+      font-size: 16px;
+    }
+  }
+
+  .relationship-button {
+    font-size: 12px;
+  }
+}

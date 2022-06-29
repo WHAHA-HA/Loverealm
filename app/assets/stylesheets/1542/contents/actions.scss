@@ -1,0 +1,58 @@
+.content-actions {
+  float: left;
+  min-height: 32px;
+
+  .content-action {
+    display: inline-block;
+    color: #777;
+    background-color: #eee;
+    padding: 4px 10px;
+    float: left;
+    font-family: arial, serif;
+    font-size: 13px;
+    cursor: pointer;
+
+    &:first-child {
+      border-radius: 3px 3px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 3px 3px;
+    }
+
+    .icon {
+      margin-right: 4px;
+    }
+
+    &:hover, &:focus {
+      text-decoration: none;
+      color: #575757;
+    }
+
+    &.active .icon {
+      color: $primary-color;
+    }
+  }
+
+  .share-button-container {
+    .share-button-icon {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      display: inline-block;
+    }
+  }
+
+  .share-buttons {
+    margin: -3px 0 0 10px;
+    padding: 0;
+    float: left;
+
+    li {
+      list-style-type: none;
+      display: inline-block;
+      margin: 0 3px;
+    }
+  }
+
+}

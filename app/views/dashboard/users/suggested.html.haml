@@ -1,0 +1,15 @@
+%ol.breadcrumb
+  %li
+    = link_to 'Home', dashboard_user_path(current_user)
+  %li Suggested Users
+
+%h2 Suggested Users
+
+#users.row
+  = render partial: 'dashboard/users/card', collection: @users, as: :user
+
+- if @users.next_page
+  .buttons.text-center
+    = link_to url_for(page: @users.next_page), class: 'btn btn-primary load-more' do
+      %span.glyphicon.glyphicon-refresh.spinning
+      Vew more

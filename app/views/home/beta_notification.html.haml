@@ -1,0 +1,12 @@
+.privacy-policy.holder
+  %h1 Beta Closed Version
+  .privacy-policy-holder
+    %p
+      %strong{:href => "#"} Dear #{params[:email]}
+      Our app is in a closed beta test. What this means is that we are doing real world testing with hundreds of users across the globe. Unfortunately we have reached the limit to the number of users we want to test the app.
+
+    %p We have reserved your account for you, and would quickly inform you when our app is fully available to the world.
+
+    %p.note In the mean time you can check out #{link_to "our team", about_us_path}, about us, and what LoveRealm is all about.
+    .dates
+      %p Date: #{Time.now.strftime("%d/%m/%Y")}

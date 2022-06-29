@@ -1,0 +1,65 @@
+.about-jesus {
+	font-family: 'Libre Baskerville', Times, serif;
+	margin-top: 48px;
+	background-color: $LR-white;
+
+	.jesus-headline {
+		padding: 50px 0 66px 0;
+	}
+
+	img {
+		width: 100%;
+	}
+
+	img[alt='jesus'] {
+		margin-top: 40px;
+	}
+
+	h1 {
+		font-size: 44px;
+		font-weight: normal;
+		text-align: center;
+	}
+
+	h2 {
+		margin-top: 40px;
+	}
+
+	.jesus-content {
+		padding: 0 35px 35px;
+
+		> p:first-child {
+			margin: 0;
+		}
+
+		p {
+			font-family: 'Libre Baskerville', Times, serif;
+			font-size: 19px;
+			margin: 30px 0 0 0;
+		}
+
+		.clearfix p {
+			width: 49%;
+		}
+
+		img[alt='bible'] {
+			width: 49%;
+			margin-top: 30px;
+			margin-left: 2%;
+		}
+
+	}
+
+	.jesus-bg {
+		margin: 0 auto 40px;
+		background-repeat: no-repeat;
+	}
+
+	.jesus-bg-two {
+		width: 100%;
+		height: 450px;
+		margin-top: 30px;
+		background-image: url('dash-img.png');
+	}
+
+}

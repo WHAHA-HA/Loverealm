@@ -1,0 +1,4 @@
+$content = $('.content[data-content-id="<%= @content.id %>"]');
+$content.find('.content-image img').attr('src', '<%= @content.image %>');
+$content.find('.description').html('<%= @content.description %>');
+$('#image-edit-modal').modal('hide').remove()

@@ -1,0 +1,85 @@
+.search-form {
+  width: 100%;
+  max-width: 375px;
+
+  .twitter-typeahead {
+    width: 100%;
+  }
+
+  .form-group {
+    width: 100%;
+    max-width: 288px;
+  }
+
+  .btn {
+    border-color: transparent;
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .search-text {
+    background-color: rgba(255, 255, 255, .6);
+    border: none;
+    color: #fff;
+    box-shadow: none;
+    width: 100%;
+  }
+
+  .form-control::-webkit-input-placeholder { color: #e4ebe5; }
+  .form-control:-moz-placeholder { color: #e4ebe5; }
+  .form-control::-moz-placeholder { color: #e4ebe5; }
+  .form-control:-ms-input-placeholder { color: #e4ebe5; }
+
+  .tt-menu {
+    width: 100%;
+    color: #333;
+
+    .tt-suggestion {
+      display: block;
+      font-size: 14px;
+      background-color: #fff;
+      padding: 4px 10px;
+      line-height: 22px;
+        cursor: pointer;
+
+      &:hover, &.tt-cursor {
+        background-color: #efefef;
+      }
+    }
+  }
+
+  .tt-dataset-footer {
+      background-color: #eee;
+      line-height: 1.5;
+      padding: 4px 10px;
+
+      a + a {
+        margin-left: 6px;
+      }
+  }
+
+  .tt-dataset .tt-dataset-footer{
+      display: none;
+  }
+
+  .tt-dataset:last-child .tt-dataset-footer {
+      display: block;
+  }
+
+  h4 {
+    font-size: 15px;
+    font-weight: 100;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 4px 10px;
+      line-height: 22px;
+    background: #ddd;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .navbar-form {
+    display: none;
+  }
+}

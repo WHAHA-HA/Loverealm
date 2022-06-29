@@ -1,0 +1,7 @@
+$('#users').append("<%= j render partial: 'dashboard/users/card', collection: @users, as: :user %>");
+
+<% if @users.next_page %>
+  $('.load-more').attr('href', '<%= url_for(page: @users.next_page) %>');
+<% else %>
+  $('.load-more').remove();
+<% end %>

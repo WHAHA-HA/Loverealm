@@ -1,0 +1,14 @@
+.modal
+  .modal-dialog
+    .modal-content
+      = simple_form_for @report do |f|
+        .modal-header Create Report
+
+        .modal-body
+          = f.label :description, "Report Message"
+          = f.input :description, as: :text, label: false, required: true
+          = f.input :target_id, as: :hidden, required: true, :input_html => { :value => @report.target_id }
+          = f.input :target_type, as: :hidden, required: true, :input_html => { :value => @report.target_type }
+
+        .modal-footer
+          %input{:type => "submit", :value => "Send Report", class: 'btn btn-default'}

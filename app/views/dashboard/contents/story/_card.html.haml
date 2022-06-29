@@ -1,0 +1,12 @@
+.story-card.col-md-6{'data-content-id' => story.id}
+  .media
+    .media-body
+      %h4.media-heading
+        = link_to story.title, dashboard_content_path(story)
+
+      =  "#{shortik(pure_text(story.description), 100)}"
+
+      = render partial: 'dashboard/contents/actions', locals: { content: story }
+
+    = link_to dashboard_content_path(story), class: 'media-right' do
+      = image_tag(story.image.url(:medium), class: 'media-object')

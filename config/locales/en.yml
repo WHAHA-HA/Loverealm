@@ -1,0 +1,71 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  hello: "Hello world"
+  site_name: LoveRealm
+  dashboard:
+    welcome:
+      finish_registration:
+        welcome_message_body: "<p>Dear %{full_name},</p>
+                          <p>Welcome to LoveRealm. On our community you will meet like minded believers who are willing to interact with you so as to help you grow in your faith. You can read more about LoveRealm on
+                            %{about_us_page}
+                          </p>
+                          <p> To connect with more believers, visit the
+                            %{suggested_users_page}
+                            and follow relevant believers. Sharing is built in our DNA, and we encourage you to share on LoveRealm by posting
+                            regularly. In case you need one-on-one help, feel free to contact your assigned mentor.
+                          </p>
+                          <p>We made LoveRealm as intuitive and easy to use as possible. We however acknowledge the fact that it is possible you
+                            may encounter certain challenges whilst using LoveRealm. Please feel free to refer to our
+                            %{help_page} for more help in case you need help.</p>
+                          <p>You can also directly reach out to our support team by replying to this message should it become necessary.
+                          God bless you for joining our community.
+                          </p> <br />
+                          <p>
+                            Kind Regards,
+                          </p>
+                          The Team at Loverealm."
+        welcome_message_subject: "Welcome to LoveRealm"
+  breadcrumbs:
+    home: Home
+  views:
+    components:
+      header:
+        home: Home
+        messages: Messages
+        notifications: Notifications
+        invite: Invite a friend
+        admin_panel: My Admin
+        profile: Profile
+        settings: My Account
+        logout: Log Out
+    dashboard:
+      invites:
+        index:
+          heading: Invite a friend
+          verse:
+            text: Then the master told his servant, "Go out to the roads and country lanes and compel them to come in, so that my house will be full."
+            source: Luke 14:23
+        invitation_options:
+          invite_by_gmail_html: 'Invite by <strong>Gmail</strong>'
+          invite_by_facebook_html: 'Invite by <strong>Facebook</strong>'
+
